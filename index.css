@@ -1,26 +1,39 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
-    font-family: "Open Sans", sans-serif;
-    background-color: aliceblue;
-  }
-
-body {
-    height: 100vh;
-    width: 100vw;
-    border: red solid 1px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family: "Open Sans", sans-serif;
+  background-color: aliceblue;
 }
 
-  .parent {
-    height: 100px;
-    width: 100px;
-    border: blue solid 1px;
-  }
+body {
+  height: 100vh;
+  width: 100vw;
+  border: red solid 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.parent {
+  height: 600px;
+  width: 400px;
+  border: blue solid 1px;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  justify-content: center;
+}
+
+.item {
+    height: 100%;
+    width: 100%;
+}
+
+.item-1 {
+  
+}
 
 
