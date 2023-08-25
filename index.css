@@ -41,6 +41,7 @@ body {
 .output {
   grid-column-start: 1 ;
   grid-column-end: 5;
+  border-radius:  15px;
 }
 
 .operator {
@@ -54,6 +55,16 @@ body {
 .child output {
   padding-left: 40px;
 }
+
+.zero {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+/* .input {
+  height: 100%;
+  width: 100%;
+} */
 
 
 
