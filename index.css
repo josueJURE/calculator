@@ -19,42 +19,55 @@ body {
 .parent {
   height: 600px;
   width: 400px;
-  border: blue solid 1px;
+  border: black 1px solid;
   border-radius: 15px;
+  overflow: hidden;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  column-gap: 10px;
+  row-gap: 10px;
+  padding: 10px;
+  background-color: rgb(27 22 22 / 39%);
+}
+
+.child {
+  border: 1px black solid;
+  display: grid;
   justify-content: center;
+  align-items: center;
+  border-radius:  15px;
 }
 
-.item {
-    display: grid;
-    height: 100%;
-    width: 100%;
+.output {
+  grid-column-start: 1 ;
+  grid-column-end: 5;
 }
 
-.screen {
-  grid-row: 1 / 2;
-  grid-column: 1 / 5;
-  background-color: black;
+.operator {
+  background-color: orange;
 }
 
-.symbols {
-  grid-row: 2 / 3;
-  grid-column: 1 / 4;
-  background-color: blue;
-
+.symbol {
+  background-color: grey;
 }
 
-.operators {
-  grid-row: 2 / 7;
-  background-color: green
-   /* grid-column: -6 / -1; */
+.child output {
+  padding-left: 40px;
 }
 
-.numbers {
-  grid-row: 3 / 7;
-  grid-column: 1 / 4;
-  background-color: gray;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
