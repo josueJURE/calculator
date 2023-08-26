@@ -1,6 +1,5 @@
-const output = document.querySelector(".output");
-const btns = document.querySelectorAll(".child");
-let screen = Array.from(document.querySelectorAll(".screen"))[0];
+const btns = document.querySelectorAll("[data-child]");
+let screen = document.querySelector("[data-screen]");
 
 let operator = ''
 let data = [];

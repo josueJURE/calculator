@@ -35,13 +35,16 @@ body {
   display: grid;
   justify-content: center;
   align-items: center;
-  border-radius:  15px;
+  border-radius: 15px;
 }
 
-.output {
-  grid-column-start: 1 ;
+.screen {
+  grid-column-start: 1;
   grid-column-end: 5;
-  border-radius:  15px;
+  border-radius: 15px;
+  display: grid;
+  align-items: center;
+  padding-left: 40px;
 }
 
 .operator {
@@ -65,20 +68,3 @@ body {
   height: 100%;
   width: 100%;
 } */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
