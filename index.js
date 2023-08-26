@@ -14,7 +14,7 @@ btns.forEach((btn) => {
       data = [];
       operator = undefined;
     } else if (!isNaN(buttonText)) {
-      screen.innerText = buttonText;
+      screen.innerText += buttonText;
     } else if (buttonText === "+/-") {
       digit = parseFloat(screen.innerText);
       screen.innerText = -digit; // Toggle the sign of the digit
