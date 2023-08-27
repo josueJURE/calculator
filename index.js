@@ -25,7 +25,15 @@ btns.forEach((btn) => {
         screen.innerText += ".";
       }
     } else if (buttonText === "=") {
-      screen.innerText = eval( data.slice(-1).join(" "));
+      // screen.innerText = new Function("return " + data.slice(-1).join(" "));
+      // screen.innerText = eval( data.slice(-1).join(" "));
+      screen.innerText = new Function("return " + data.slice(-1).join(" "))();
+
+
     }
   });
 });
+
+
+
+
