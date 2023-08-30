@@ -1,4 +1,5 @@
-const btns = document.querySelectorAll("[data-child]");
+const btns = document.querySelectorAll("[data-value]");
+console.log(btns)
 let screen = document.querySelector("[data-screen]");
 const operators = document.querySelectorAll("[data-operator]");
 
@@ -20,16 +21,13 @@ btns.forEach((btn) => {
     } else if (buttonText === "+/-") {
       digit = parseFloat(screen.innerText);
       screen.innerText = -digit; // Toggle the sign of the digit
+      debugger
     } else if (buttonText === ".") {
       if (!screen.innerText.includes(".")) {
         screen.innerText += ".";
       }
     } else if (buttonText === "=") {
-      // screen.innerText = new Function("return " + data.slice(-1).join(" "));
-      // screen.innerText = eval( data.slice(-1).join(" "));
       screen.innerText = new Function("return " + data.slice(-1).join(" "))();
-
-
     }
   });
 });
