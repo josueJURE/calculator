@@ -26,13 +26,13 @@ btns.forEach((btn) => {
       screen.innerText = data.join("");
 
     }
-
-    if (buttonValue === "+/-") {
+    if (buttonValue === "minus") {
       let currentValue = data[data.length - 1];
       let toggledValue = -currentValue;
       screen.innerText = toggledValue; // Update the screen
       // Update the value in the data array
       data[data.length - 1] = toggledValue;
+      console.log(data)
   }
 
    if (buttonValue === ".") {
@@ -42,8 +42,11 @@ btns.forEach((btn) => {
    }
     if (buttonValue === "=") {
       // screen.innerText = new Function("return " + data.slice(-1).join(" "))();
-      screen.innerText = eval(data.join(""));
+      let result =  eval(data.join(""))
+      screen.innerText = result;
       console.log(data);
+      data = [];
+      data.push(result)
     } 
 
     if (buttonValue === "%") {
