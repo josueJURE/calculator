@@ -17,20 +17,31 @@ btns.forEach((btn) => {
     } if (Number(buttonValue) === 0 && screen.innerText.startsWith("0.") ) {
         screen.innerText += buttonValue;
       
-    } if (!isNaN(Number(buttonValue)) || /[\/x\-+]/.test(buttonValue)) {
+    } if (!isNaN(Number(buttonValue))) {
       screen.innerText += buttonValue;
-      data.push(screen.innerText);
-    } if (buttonValue === "+/-") {
-      digit = parseFloat(screen.innerText);
-      console.log(screen.innerText);
-      screen.innerText = -digit; // Toggle the sign of the digit
-      // debugger;
-    } if (buttonValue === ".") {
+      data.push(Number(screen.innerText));
+      console.log(data)
+    } if (/[\/x\-+]/.test(buttonValue)) {
+      screen.innerText = "";
+    }
+
+    if (buttonValue === "+/-") {
+      let currentValue = data[data.length - 1];
+      let toggledValue = -currentValue;
+      
+      screen.innerText = toggledValue; // Update the screen
+      
+      // Update the value in the data array
+      data[data.length - 1] = toggledValue;
+  }
+
+   if (buttonValue === ".") {
       if (!screen.innerText.includes(".")) {
         screen.innerText += ".";
       }
     } if (buttonValue === "=") {
-      screen.innerText = new Function("return " + data.slice(-1).join(" "))();
+      // screen.innerText = new Function("return " + data.slice(-1).join(" "))();
+      screen.innerText = eval(data.slice(-1).join(" "));
       console.log(data);
     } if (buttonValue === "%") {
       screen.innerText = screen.innerText / 100;
