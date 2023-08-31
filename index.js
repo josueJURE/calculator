@@ -18,19 +18,19 @@ btns.forEach((btn) => {
         screen.innerText += buttonValue;
       
     } if (!isNaN(Number(buttonValue))) {
-      screen.innerText += buttonValue;
-      data.push(Number(screen.innerText));
-      console.log(data)
+      screen.innerText = buttonValue;
+      data.push(screen.innerText);
+      screen.innerText = data.join("");
     } if (/[\/x\-+]/.test(buttonValue)) {
-      screen.innerText = "";
+      data.push(buttonValue)
+      screen.innerText = data.join("");
+
     }
 
     if (buttonValue === "+/-") {
       let currentValue = data[data.length - 1];
       let toggledValue = -currentValue;
-      
       screen.innerText = toggledValue; // Update the screen
-      
       // Update the value in the data array
       data[data.length - 1] = toggledValue;
   }
@@ -39,11 +39,14 @@ btns.forEach((btn) => {
       if (!screen.innerText.includes(".")) {
         screen.innerText += ".";
       }
-    } if (buttonValue === "=") {
+   }
+    if (buttonValue === "=") {
       // screen.innerText = new Function("return " + data.slice(-1).join(" "))();
-      screen.innerText = eval(data.slice(-1).join(" "));
+      screen.innerText = eval(data.join(""));
       console.log(data);
-    } if (buttonValue === "%") {
+    } 
+
+    if (buttonValue === "%") {
       screen.innerText = screen.innerText / 100;
       console.log("josué");
     }
