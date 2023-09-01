@@ -28,11 +28,13 @@ btns.forEach((btn) => {
     }
     if (buttonValue === "minus") {
       let currentValue = data[data.length - 1];
+      if(currentValue === undefined) return
       let toggledValue = -currentValue;
       screen.innerText = toggledValue; // Update the screen
       // Update the value in the data array
       data[data.length - 1] = toggledValue;
       console.log(data)
+      // debugger
   }
 
    if (buttonValue === ".") {
