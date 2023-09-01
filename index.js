@@ -4,7 +4,6 @@ const operators = document.querySelectorAll("[data-operator]");
 
 let x = "";
 let data = [];
-let digit;
 
 btns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
@@ -13,7 +12,7 @@ btns.forEach((btn) => {
     if (buttonValue === "AC") {
       screen.innerText = "";
       data = [];
-      x = undefined;
+      screen.innerText = 0;
     } if (Number(buttonValue) === 0 && screen.innerText.startsWith("0.") ) {
         screen.innerText += buttonValue;
       
@@ -34,7 +33,7 @@ btns.forEach((btn) => {
       // Update the value in the data array
       data[data.length - 1] = toggledValue;
       console.log(data)
-      // debugger
+      // debuggera
   }
 
    if (buttonValue === ".") {
