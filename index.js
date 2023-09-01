@@ -53,5 +53,14 @@ btns.forEach((btn) => {
       screen.innerText = screen.innerText / 100;
       console.log("josué");
     }
+
+    if (buttonValue === "DE") {
+      let newArray = data.slice(0, -1);
+      screen.innerText = newArray.join("");
+      data = newArray;
+      if (screen.innerText === "") {
+        screen.innerText = 0;
+      }
+    }
   });
 });
