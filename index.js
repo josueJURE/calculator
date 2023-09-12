@@ -22,6 +22,12 @@ btns.forEach((btn) => {
       screen.innerText = data.join("");
     }
     if (/[\/*\-+]/.test(buttonValue)) {
+      // console.warn("Hello");
+      console.debug(`Operator pressed: ${buttonValue}, data is ${data}`);
+      if (data.slice(-1)[0] === ".") {
+        console.debug(". removed");
+        data.pop();
+      }
       data.push(buttonValue);
       screen.innerText = data.join("");
     }
@@ -35,18 +41,25 @@ btns.forEach((btn) => {
       console.log(data);
     }
 
+    //Number.isFinite(value)
+    // When the decimal element is clicked, a . should append to the currently displayed value; two . in one number should not be accepted.
     if (buttonValue === ".") {
-      if (!screen.innerText.includes(".")) {
-        screen.innerText += ".";
-      }
+      
+  
+      data.push(".");
+      console.log(data);
+      screen.innerText = data.join("");
     }
+
     if (buttonValue === "=") {
       // debugger
       let result = eval(data.join(""));
+      console.log(result);
       console.log(data);
       data = [];
       data.push(result);
       screen.innerText = result;
+      console.log(result);
     }
 
     if (buttonValue === "%") {
