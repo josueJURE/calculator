@@ -8,6 +8,44 @@ btns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     let buttonValue = e.target.dataset.value;
 
+    // if (buttonValue === "(") {
+    //   let isOpenParenthesis = true;
+    //   for (let i = data.length - 1; i >= 0; i--) {
+    //     if (/^\d$/.test(data[i])) { // Use /^\d$/ to match a single digit
+    //       isOpenParenthesis = false;
+    //       break; // Exit the loop as soon as a digit is found
+    //     }
+    //   }
+    //   // Rest of your code...
+    // }
+
+    if (buttonValue === "(") {
+      let isOpenparenthesis = true;
+      for(let i = data.length -1; i >= 0; i--) {
+        if(/^\d$/.test(data[i])) {
+          console.log( "last element in array " + data[i])
+          isOpenparenthesis = false;
+          break;
+        } if (data[i] === ")") {
+          isOpenparenthesis = false;
+          break
+        } if (/[\/*\-+]/.test(data[i])) {
+          break
+
+        }
+      }
+      if(isOpenparenthesis) {
+        data.push("(");
+      }
+      screen.innerText = data.join("");
+
+    }
+
+    if (buttonValue === ")") {
+      data.push(")");
+      screen.innerText = data.join("");
+    }
+
     if (buttonValue === "AC") {
       screen.innerText = "";
       data = [];
@@ -22,8 +60,6 @@ btns.forEach((btn) => {
       screen.innerText = data.join("");
     }
     if (/[\/*\-+]/.test(buttonValue)) {
-      // console.warn("Hello");
-      console.debug(`Operator pressed: ${buttonValue}, data is ${data}`);
       if (data.slice(-1)[0] === ".") {
         console.debug(". removed");
         data.pop();
@@ -41,10 +77,7 @@ btns.forEach((btn) => {
       console.log(data);
     }
 
-    //Number.isFinite(value)
-    // When the decimal element is clicked, a . should append to the currently displayed value; two . in one number should not be accepted.
     if (buttonValue === ".") {
-      console.log("len " + data.length);
       var dotAllowed = true;
       for (var i = data.length - 1; i >= 0; i--) {
         console.log("data > " + data[i]);
@@ -54,6 +87,7 @@ btns.forEach((btn) => {
         } else if (/[\/*\-+]/.test(data[i])) {
           break;
         }
+        debugger;
       }
       if (dotAllowed) {
         if (data.length == 0) {
