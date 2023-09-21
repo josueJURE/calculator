@@ -21,24 +21,24 @@ btns.forEach((btn) => {
 
     if (buttonValue === "(") {
       let isOpenparenthesis = true;
-      for(let i = data.length -1; i >= 0; i--) {
-        if(/^\d$/.test(data[i])) {
-          console.log( "last element in array " + data[i])
+      for (let i = data.length - 1; i >= 0; i--) {
+        if (/^\d$/.test(data[i])) {
+          console.log("last element in array " + data[i]);
           isOpenparenthesis = false;
           break;
-        } if (data[i] === ")") {
+        }
+        if (data[i] === ")") {
           isOpenparenthesis = false;
-          break
-        } if (/[\/*\-+]/.test(data[i])) {
-          break
-
+          break;
+        }
+        if (/[\/*\-+]/.test(data[i])) {
+          break;
         }
       }
-      if(isOpenparenthesis) {
+      if (isOpenparenthesis) {
         data.push("(");
       }
       screen.innerText = data.join("");
-
     }
 
     if (buttonValue === ")") {
@@ -103,14 +103,15 @@ btns.forEach((btn) => {
     }
 
     if (buttonValue === "=") {
-      // debugger
-      let result = eval(data.join(""));
-      console.log(result);
-      console.log(data);
-      data = [];
-      data.push(result);
-      screen.innerText = result;
-      console.log(result);
+      try {
+        let result = eval(data.join(""));
+        console.log(result);
+        data = [];
+        data.push(result);
+        screen.innerText = result;
+      } catch (e) {
+        screen.innerText = e.name;
+      }
     }
 
     if (buttonValue === "%") {
