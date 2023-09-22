@@ -105,9 +105,8 @@ btns.forEach((btn) => {
     if (buttonValue === "=") {
       try {
         let result = eval(data.join(""));
-        data = [];
-        data.push(result);
-        divideByZero(screen, result)
+        displayResult(data, result);
+        divideByZero(screen, result);
       } catch (e) {
         screen.innerText = `${e.name} press AC`;
       }
@@ -116,7 +115,12 @@ btns.forEach((btn) => {
     function divideByZero(display, outcome) {
       outcome === Infinity
         ? (display.innerText = "Math Error. Cannot divide by zero")
-        : (display.innerText = outcomet);
+        : (display.innerText = outcome);
+    }
+    function displayResult(array, outcome) {
+      array = [];
+      array.push(outcome);
+      
     }
 
     if (buttonValue === "%") {
