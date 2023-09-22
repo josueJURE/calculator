@@ -105,12 +105,11 @@ btns.forEach((btn) => {
     if (buttonValue === "=") {
       try {
         let result = eval(data.join(""));
-        console.log(result);
         data = [];
         data.push(result);
-        screen.innerText = result;
+        result === Infinity ? screen.innerText = "Math Error. Cannot divide by zero" : screen.innerText = result;
       } catch (e) {
-        screen.innerText = e.name;
+        screen.innerText = `${e.name} press AC`;
       }
     }
 
