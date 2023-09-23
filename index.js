@@ -78,28 +78,7 @@ btns.forEach((btn) => {
     }
 
     if (buttonValue === ".") {
-      var dotAllowed = true;
-      for (var i = data.length - 1; i >= 0; i--) {
-        console.log("data > " + data[i]);
-        if (data[i] === ".") {
-          dotAllowed = false;
-          break;
-        } else if (/[\/*\-+]/.test(data[i])) {
-          break;
-        }
-        debugger;
-      }
-      if (dotAllowed) {
-        if (data.length == 0) {
-          data.push("0");
-        } else if (/[\/*\-+]/.test(data[data.length - 1])) {
-          data.push("0");
-        }
-        data.push(".");
-      }
-      console.log(data);
-
-      screen.innerText = data.join("");
+      canUserAddDot();
     }
 
     if (buttonValue === "=") {
@@ -120,7 +99,6 @@ btns.forEach((btn) => {
     function displayResult(array, outcome) {
       array = [];
       array.push(outcome);
-      
     }
 
     if (buttonValue === "%") {
@@ -138,3 +116,25 @@ btns.forEach((btn) => {
     }
   });
 });
+
+function canUserAddDot() {
+  var dotAllowed = true;
+  for (var i = data.length - 1; i >= 0; i--) {
+    console.log("data > " + data[i]);
+    if (data[i] === ".") {
+      dotAllowed = false;
+      break;
+    } else if (/[\/*\-+]/.test(data[i])) {
+      break;
+    }
+  }
+  if (dotAllowed) {
+    if (data.length == 0) {
+      data.push("0");
+    } else if (/[\/*\-+]/.test(data[data.length - 1])) {
+      data.push("0");
+    }
+    data.push(".");
+  }
+  screen.innerText = data.join("");
+}
