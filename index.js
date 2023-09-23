@@ -47,10 +47,15 @@ btns.forEach((btn) => {
     }
 
     if (buttonValue === "AC") {
+      deleteEverythingFromScreen();
+    }
+
+    function deleteEverythingFromScreen() {
       screen.innerText = "";
       data = [];
       screen.innerText = 0;
     }
+
     if (Number(buttonValue) === 0 && screen.innerText.startsWith("0.")) {
       screen.innerText += buttonValue;
     }
