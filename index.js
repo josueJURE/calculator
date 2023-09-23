@@ -103,19 +103,22 @@ btns.forEach((btn) => {
 
     if (buttonValue === "%") {
       screen.innerText = screen.innerText / 100;
-      console.log("josué");
     }
 
     if (buttonValue === "DE") {
-      let newArray = data.slice(0, -1);
-      screen.innerText = newArray.join("");
-      data = newArray;
-      if (screen.innerText === "") {
-        screen.innerText = 0;
-      }
+      deteLastEntry();
     }
   });
 });
+
+function deteLastEntry() {
+  let newArray = data.slice(0, -1);
+  screen.innerText = newArray.join("");
+  data = newArray;
+  if (screen.innerText === "") {
+    screen.innerText = 0;
+  }
+}
 
 function canUserAddDot() {
   var dotAllowed = true;
