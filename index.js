@@ -50,11 +50,7 @@ btns.forEach((btn) => {
       deleteEverythingFromScreen();
     }
 
-    function deleteEverythingFromScreen() {
-      screen.innerText = "";
-      data = [];
-      screen.innerText = 0;
-    }
+  
 
     if (Number(buttonValue) === 0 && screen.innerText.startsWith("0.")) {
       screen.innerText += buttonValue;
@@ -66,20 +62,13 @@ btns.forEach((btn) => {
     }
     if (/[\/*\-+]/.test(buttonValue)) {
       if (data.slice(-1)[0] === ".") {
-        console.debug(". removed");
         data.pop();
       }
       data.push(buttonValue);
       screen.innerText = data.join("");
     }
     if (buttonValue === "minus") {
-      let currentValue = data[data.length - 1];
-      if (currentValue === undefined) return;
-      let toggledValue = -currentValue;
-      screen.innerText = toggledValue; // Update the screen
-      // Update the value in the data array
-      data[data.length - 1] = toggledValue;
-      console.log(data);
+      toggleSign();
     }
 
     if (buttonValue === ".") {
@@ -146,3 +135,21 @@ function canUserAddDot() {
   }
   screen.innerText = data.join("");
 }
+
+function deleteEverythingFromScreen() {
+  screen.innerText = "";
+  data = [];
+  screen.innerText = 0;
+}
+
+function toggleSign() {
+  let currentValue = data[data.length - 1];
+  if (currentValue === undefined) return;
+  let toggledValue = -currentValue;
+  screen.innerText = toggledValue; // Update the screen
+  // Update the value in the data array
+  data[data.length - 1] = toggledValue;
+  console.log(data);
+}
+
+
