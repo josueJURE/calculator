@@ -4,10 +4,11 @@ const operators = document.querySelectorAll("[data-operator]");
 
 let data = [];
 
+
+
 btns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     let buttonValue = e.target.dataset.value;
-
     // if (buttonValue === "(") {
     //   let isOpenParenthesis = true;
     //   for (let i = data.length - 1; i >= 0; i--) {
@@ -77,7 +78,9 @@ btns.forEach((btn) => {
 
     if (buttonValue === "=") {
       try {
+        console.log(data)
         let result = eval(data.join(""));
+        console.log(eval(data.join("")))
         displayResult(data, result);
         divideByZero(screen, result);
       } catch (e) {
@@ -133,7 +136,7 @@ function canUserAddDot() {
     }
     data.push(".");
   }
-  screen.innerText = data.join("");
+  screen.innerText = data.join(" ");
 }
 
 function deleteEverythingFromScreen() {
@@ -144,11 +147,13 @@ function deleteEverythingFromScreen() {
 
 function toggleSign() {
   let currentValue = data[data.length - 1];
+  console.log(currentValue)
   if (currentValue === undefined) return;
   let toggledValue = -currentValue;
-  screen.innerText = toggledValue; // Update the screen
+  // screen.innerText = toggledValue; // Update the screen
   // Update the value in the data array
   data[data.length - 1] = toggledValue;
+  screen.innerText = data.join("");
   console.log(data);
 }
 
