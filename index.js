@@ -4,8 +4,6 @@ const operators = document.querySelectorAll("[data-operator]");
 
 let data = [];
 
-
-
 btns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     let buttonValue = e.target.dataset.value;
@@ -24,7 +22,6 @@ btns.forEach((btn) => {
       let isOpenparenthesis = true;
       for (let i = data.length - 1; i >= 0; i--) {
         if (/^\d$/.test(data[i])) {
-          console.log("last element in array " + data[i]);
           isOpenparenthesis = false;
           break;
         }
@@ -51,8 +48,6 @@ btns.forEach((btn) => {
       deleteEverythingFromScreen();
     }
 
-  
-
     if (Number(buttonValue) === 0 && screen.innerText.startsWith("0.")) {
       screen.innerText += buttonValue;
     }
@@ -64,6 +59,11 @@ btns.forEach((btn) => {
     if (/[\/*\-+]/.test(buttonValue)) {
       if (data.slice(-1)[0] === ".") {
         data.pop();
+      }
+      if (buttonValue === "*") {
+        buttonValue = "x";
+      } else if (buttonValue === "/") {
+        buttonValue = "÷";
       }
       data.push(buttonValue);
       screen.innerText = data.join("");
@@ -78,10 +78,11 @@ btns.forEach((btn) => {
 
     if (buttonValue === "=") {
       try {
-        console.log(data)
-        let result = eval(data.join(""));
-        console.log(eval(data.join("")))
-        displayResult(data, result);
+        const replacedArray = data.map((item) => (item === "x" ? "*" : item === "÷" ? "/" : item));
+        console.log(data);
+        let result = eval(replacedArray .join(""));
+        console.log(eval(replacedArray .join("")));
+        displayResult(replacedArray, result);
         divideByZero(screen, result);
       } catch (e) {
         screen.innerText = `${e.name} press AC`;
@@ -147,14 +148,10 @@ function deleteEverythingFromScreen() {
 
 function toggleSign() {
   let currentValue = data[data.length - 1];
-  console.log(currentValue)
   if (currentValue === undefined) return;
   let toggledValue = -currentValue;
   // screen.innerText = toggledValue; // Update the screen
   // Update the value in the data array
   data[data.length - 1] = toggledValue;
   screen.innerText = data.join("");
-  console.log(data);
 }
-
-
