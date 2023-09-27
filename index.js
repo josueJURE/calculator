@@ -60,11 +60,8 @@ btns.forEach((btn) => {
       if (data.slice(-1)[0] === ".") {
         data.pop();
       }
-      if (buttonValue === "*") {
-        buttonValue = "x";
-      } else if (buttonValue === "/") {
-        buttonValue = "÷";
-      }
+      buttonValue === "*" ? buttonValue = "X" : buttonValue === "/" ? buttonValue = "÷" : buttonValue;
+    
       data.push(buttonValue);
       screen.innerText = data.join("");
     }
