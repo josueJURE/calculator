@@ -60,7 +60,7 @@ btns.forEach((btn) => {
       if (data.slice(-1)[0] === ".") {
         data.pop();
       }
-      buttonValue === "*" ? buttonValue = "X" : buttonValue === "/" ? buttonValue = "÷" : buttonValue;
+      buttonValue === "*" ? buttonValue = "x" : buttonValue === "/" ? buttonValue = "÷" : buttonValue;
     
       data.push(buttonValue);
       screen.innerText = data.join("");
@@ -73,11 +73,13 @@ btns.forEach((btn) => {
       canUserAddDot();
     }
 
+    // This is the = fuction
     if (buttonValue === "=") {
       try {
         const replacedArray = data.map((item) => (item === "x" ? "*" : item === "÷" ? "/" : item));
-        console.log(data);
         let result = eval(replacedArray .join(""));
+        console.log(result)
+
         console.log(eval(replacedArray .join("")));
         displayResult(replacedArray, result);
         divideByZero(screen, result);
