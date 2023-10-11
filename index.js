@@ -78,11 +78,11 @@ btns.forEach((btn) => {
       try {
         const replacedArray = data.map((item) => (item === "x" ? "*" : item === "÷" ? "/" : item));
         let result = eval(replacedArray .join(""));
-        console.log(result)
-
         console.log(eval(replacedArray .join("")));
         displayResult(replacedArray, result);
         divideByZero(screen, result);
+        data = [];
+        data.push(result)
       } catch (e) {
         screen.innerText = `${e.name} press AC`;
       }
