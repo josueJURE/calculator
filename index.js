@@ -146,11 +146,25 @@ function deleteEverythingFromScreen() {
 }
 
 function toggleSign() {
-  let currentValue = data[data.length - 1];
-  if (currentValue === undefined) return;
-  let toggledValue = -currentValue;
-  // screen.innerText = toggledValue; // Update the screen
-  // Update the value in the data array
-  data[data.length - 1] = toggledValue;
-  screen.innerText = data.join("");
+  let currentExpression = data.join("");
+  let reversedExpression = currentExpression.split("").reverse().join("");
+  let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
+  // debugger
+
+  if (match) {
+    let start = currentExpression.length - match[0].length;
+    let end = currentExpression.length;
+    let currentValue = Number(match[0]);
+
+    if (!isNaN(currentValue)) {
+      // If it's a number, toggle its sign
+      currentValue = -currentValue;
+      data = data.slice(0, start).concat(currentValue.toString().split(""), data.slice(end));
+      screen.innerText = data.join("");
+    }
+  }
 }
+
+
+
+
