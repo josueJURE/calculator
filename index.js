@@ -147,7 +147,7 @@ function deleteEverythingFromScreen() {
 
 function toggleSign() {
   let currentExpression = data.join("");
-  let reversedExpression = currentExpression.split("").reverse().join("");
+  let reversedExpression = currentExpression.split("").join("");
   let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
   // debugger
 
