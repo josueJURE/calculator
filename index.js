@@ -96,7 +96,7 @@ btns.forEach((btn) => {
     }
     function zeroDivedByZero(display, outcome) {
       Number.isNaN(outcome)
-      ? (display.innerText = "Invalid format: You cannot divided by zero" )
+      ? (display.innerText = "0÷0 is an nvalid format press AC" )
       : (display.innerText = outcome)
     }
     function displayResult(array, outcome) {
