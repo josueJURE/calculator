@@ -7,17 +7,7 @@ let data = [];
 btns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     let buttonValue = e.target.dataset.value;
-    // if (buttonValue === "(") {
-    //   let isOpenParenthesis = true;
-    //   for (let i = data.length - 1; i >= 0; i--) {
-    //     if (/^\d$/.test(data[i])) { // Use /^\d$/ to match a single digit
-    //       isOpenParenthesis = false;
-    //       break; // Exit the loop as soon as a digit is found
-    //     }
-    //   }
-    //   // Rest of your code...
-    // }
-
+   
     if (buttonValue === "(") {
       let isOpenparenthesis = true;
       for (let i = data.length - 1; i >= 0; i--) {
@@ -73,7 +63,7 @@ btns.forEach((btn) => {
       canUserAddDot();
     }
 
-    // This is the = fuction
+  
     if (buttonValue === "=") {
       try {
         const replacedArray = data.map((item) => (item === "x" ? "*" : item === "÷" ? "/" : item));
@@ -94,11 +84,6 @@ btns.forEach((btn) => {
       }
     }
 
-    // if(buttonValue === "÷") {
-    //   try {
-
-    //   }
-    // }
 
     function divideByZero(display, outcome) {
       outcome === Infinity
@@ -169,7 +154,7 @@ function toggleSign() {
   let currentExpression = data.join("");
   let reversedExpression = currentExpression.split("").reverse().join("");
   let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
-  // debugger
+
 
   if (match) {
     let start = currentExpression.length - match[0].length;
@@ -177,7 +162,6 @@ function toggleSign() {
     let currentValue = Number(match[0]);
 
     if (!isNaN(currentValue)) {
-      // If it's a number, toggle its sign
       currentValue = -currentValue;
       data = data.slice(0, start).concat(currentValue.toString().split(""), data.slice(end));
       screen.innerText = data.join("");
