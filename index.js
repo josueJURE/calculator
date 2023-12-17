@@ -78,16 +78,17 @@ btns.forEach((btn) => {
       try {
         const replacedArray = data.map((item) => (item === "x" ? "*" : item === "÷" ? "/" : item));
         // Check if the expression involves 0/0
+        // if (areYouDivindingByZero(replacedArray)) {
+        //   screen.innerText = "You cannot divide by zero. Press AC";
+        // }
+         
         if (areYouDividingdZeroByZero(replacedArray)) {
-          screen.innerText = "0/0 is an invalid format used. Press AC";
-        } if (areYouDivindingByZero(replacedArray)) {
-          screen.innerText = "You cannot divide by zero. Press AC";
-          // debugger
-        } else {
+          screen.innerText = "0÷0 is an invalid format. Press AC";
+        }  else {
           let result = eval(replacedArray.join(""));
           console.log(result)
           displayResult(replacedArray, result);
-          screen.innerText = result
+          screen.innerText = result === Infinity ? "You cannot divide by zero. Press AC" : result
           // divideByZero(screen, result);
           data = [];
           data.push(result);
