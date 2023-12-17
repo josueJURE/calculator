@@ -80,8 +80,8 @@ btns.forEach((btn) => {
         let result = eval(replacedArray .join(""));
         console.log(eval(replacedArray .join("")));
         displayResult(replacedArray, result);
-        divideByZero(screen, result);
         zeroDivedByZero(screen, result)
+        divideByZero(screen, result);
         data = [];
         data.push(result)
       } catch (e) {
