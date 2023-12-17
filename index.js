@@ -78,21 +78,41 @@ btns.forEach((btn) => {
       try {
         const replacedArray = data.map((item) => (item === "x" ? "*" : item === "÷" ? "/" : item));
         let result = eval(replacedArray .join(""));
+        if(result === NaN) {
+          screen.innerText = "You cannot divide by Zero";
+        }
+        console.log(result)
         console.log(eval(replacedArray .join("")));
         displayResult(replacedArray, result);
         divideByZero(screen, result);
+        zeroDivedByZero(screen, result)
         data = [];
         data.push(result)
+      
       } catch (e) {
         screen.innerText = `${e.name} press AC`;
       }
     }
+
+    // if(buttonValue === "÷") {
+    //   try {
+
+    //   }
+    // }
 
     function divideByZero(display, outcome) {
       outcome === Infinity
         ? (display.innerText = "Math Error. Cannot divide by zero")
         : (display.innerText = outcome);
     }
+
+    function zeroDivedByZero(display, outcome) {
+      outcome === NaN
+      ? (display.innerText = "Invalid format used. You cannot divided by zero" )
+      : (display.innerText = outcome)
+    }
+
+
     function displayResult(array, outcome) {
       array = [];
       array.push(outcome);
