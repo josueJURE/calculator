@@ -78,13 +78,17 @@ btns.forEach((btn) => {
       try {
         const replacedArray = data.map((item) => (item === "x" ? "*" : item === "÷" ? "/" : item));
         // Check if the expression involves 0/0
-        if (hasZeroDividedByZero(replacedArray)) {
-          screen.innerText = "Invalid format used. You cannot divide by zero";
+        if (areYouDividingdZeroByZero(replacedArray)) {
+          screen.innerText = "0/0 is an invalid format used. Press AC";
+        } if (areYouDivindingByZero(replacedArray)) {
+          screen.innerText = "You cannot divide by zero. Press AC";
+          // debugger
         } else {
           let result = eval(replacedArray.join(""));
-          console.log(result);
+          console.log(result)
           displayResult(replacedArray, result);
-          divideByZero(screen, result);
+          screen.innerText = result
+          // divideByZero(screen, result);
           data = [];
           data.push(result);
         }
@@ -94,13 +98,21 @@ btns.forEach((btn) => {
     }
  
 
-    function divideByZero(display, outcome) {
-      outcome === Infinity
-        ? (display.innerText = "Math Error. Cannot divide by zero")
-        : (display.innerText = outcome);
+    function areYouDivindingByZero(array) {
+      for (let i = 0; i < array.length - 2; i++) {
+        if (!isNaN(Number(array[i])) && array[i + 1] === "/" && array[i + 2] === "0") {
+          return true;
+        }
+      }
+      return false;
     }
+    
 
-    function hasZeroDividedByZero(array) {
+    
+
+   
+
+    function areYouDividingdZeroByZero(array) {
       for (let i = 0; i < array.length - 2; i++) {
         if (array[i] === "0" && array[i + 1] === "/" && array[i + 2] === "0") {
           return true;
