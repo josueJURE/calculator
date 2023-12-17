@@ -81,6 +81,7 @@ btns.forEach((btn) => {
         console.log(eval(replacedArray .join("")));
         displayResult(replacedArray, result);
         divideByZero(screen, result);
+        zeroDivedByZero(screen, result)
         data = [];
         data.push(result)
       } catch (e) {
@@ -92,6 +93,11 @@ btns.forEach((btn) => {
       outcome === Infinity
         ? (display.innerText = "Math Error. Cannot divide by zero")
         : (display.innerText = outcome);
+    }
+    function zeroDivedByZero(display, outcome) {
+      isNaN(outcome)
+      ? (display.innerText = "Invalid format: You cannot divided by zero" )
+      : (display.innerText = outcome)
     }
     function displayResult(array, outcome) {
       array = [];
