@@ -21,9 +21,10 @@ btns.forEach((btn) => {
     userClicksOnEqualButton(buttonValue);
 
 
-    if (Number(buttonValue) === 0 && screen.innerText.startsWith("0.")) {
-      screen.innerText += buttonValue;
-    }
+    handlingZeroFollowedByAdecimal(buttonValue)
+
+    
+
     if (!isNaN(Number(buttonValue))) {
       screen.innerText = buttonValue;
       data.push(screen.innerText);
@@ -213,5 +214,11 @@ function insertClosingParenthesis(button) {
   if (button === ")") {
     data.push(")");
     screen.innerText = data.join("");
+  }
+}
+
+function handlingZeroFollowedByAdecimal(button) {
+  if (Number(button) === 0 && screen.innerText.startsWith("0.")) {
+    screen.innerText += buttonValue;
   }
 }
