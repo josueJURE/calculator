@@ -16,6 +16,10 @@ btns.forEach((btn) => {
 
     toggleSign(buttonValue);
 
+    canUserAddDot(buttonValue);
+
+    userClicksOnEqualButton(buttonValue);
+
 
     if (Number(buttonValue) === 0 && screen.innerText.startsWith("0.")) {
       screen.innerText += buttonValue;
@@ -42,38 +46,38 @@ btns.forEach((btn) => {
     
     
 
+function userClicksOnEqualButton(button) {
+  if (button === "=") {
+    try {
+      const replacedArray = data.map((item) => item === "x" ? "*" : item === "÷" ? "/" : item);
+      // Check if the expression involves 0/0
+      // if (areYouDivindingByZero(replacedArray)) {
+      //   screen.innerText = "You cannot divide by zero. Press AC";
+      // }
 
-    canUserAddDot(buttonValue);
+      if (areYouDividingdZeroByZero(replacedArray)) {
+        screen.innerText = "0÷0 is an invalid format. Press AC";
+      } else {
+        let result = eval(replacedArray.join(""));
+        console.log(result);
+        displayResult(replacedArray, result);
+        screen.innerText =
+          result === Infinity
+            ? "You cannot divide by zero. Press AC"
+            : result;
+        // divideByZero(screen, result);
+        data = [];
+        data.push(result);
+      }
+    } catch (e) {
+      screen.innerText = `${e.name} press AC`;
+    }
+  }
+
+}
   
 
-    if (buttonValue === "=") {
-      try {
-        const replacedArray = data.map((item) =>
-          item === "x" ? "*" : item === "÷" ? "/" : item
-        );
-        // Check if the expression involves 0/0
-        // if (areYouDivindingByZero(replacedArray)) {
-        //   screen.innerText = "You cannot divide by zero. Press AC";
-        // }
-
-        if (areYouDividingdZeroByZero(replacedArray)) {
-          screen.innerText = "0÷0 is an invalid format. Press AC";
-        } else {
-          let result = eval(replacedArray.join(""));
-          console.log(result);
-          displayResult(replacedArray, result);
-          screen.innerText =
-            result === Infinity
-              ? "You cannot divide by zero. Press AC"
-              : result;
-          // divideByZero(screen, result);
-          data = [];
-          data.push(result);
-        }
-      } catch (e) {
-        screen.innerText = `${e.name} press AC`;
-      }
-    }
+   
 
     function areYouDivindingByZero(array) {
       for (let i = 0; i < array.length - 2; i++) {
