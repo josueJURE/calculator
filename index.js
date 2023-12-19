@@ -88,21 +88,22 @@ btns.forEach((btn) => {
       screen.innerText = screen.innerText / 100;
     }
 
-    if (buttonValue === "DE") {
-      deteLastEntry();
-    }
+    deteLastEntry(buttonValue);
   });
 });
 
 // end  of forEach() statement
 
-function deteLastEntry() {
-  let newArray = data.slice(0, -1);
-  screen.innerText = newArray.join("");
-  data = newArray;
-  if (screen.innerText === "") {
-    screen.innerText = 0;
+function deteLastEntry(button) {
+  if(button === "DE") {
+    let newArray = data.slice(0, -1);
+    screen.innerText = newArray.join("");
+    data = newArray;
+    if (screen.innerText === "") {
+      screen.innerText = 0;
+    }
   }
+
 }
 
 function canUserAddDot(button) {
