@@ -8,26 +8,11 @@ btns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     let buttonValue = e.target.dataset.value;
 
-    if (buttonValue === "(") {
-      let isOpenparenthesis = true;
-      for (let i = data.length - 1; i >= 0; i--) {
-        if (/^\d$/.test(data[i])) {
-          isOpenparenthesis = false;
-          break;
-        }
-        if (data[i] === ")") {
-          isOpenparenthesis = false;
-          break;
-        }
-        if (/[\/*\-+]/.test(data[i])) {
-          break;
-        }
-      }
-      if (isOpenparenthesis) {
-        data.push("(");
-      }
-      screen.innerText = data.join("");
-    }
+    insertOpeningParenthesis()
+
+  
+
+ 
 
     if (buttonValue === ")") {
       data.push(")");
@@ -129,6 +114,29 @@ btns.forEach((btn) => {
 
     if (buttonValue === "DE") {
       deteLastEntry();
+    }
+    function insertOpeningParenthesis() {
+      if (buttonValue === "(") {
+        let isOpenparenthesis = true;
+        for (let i = data.length - 1; i >= 0; i--) {
+          if (/^\d$/.test(data[i])) {
+            isOpenparenthesis = false;
+            break;
+          }
+          if (data[i] === ")") {
+            isOpenparenthesis = false;
+            break;
+          }
+          if (/[\/*\-+]/.test(data[i])) {
+            break;
+          }
+        }
+        if (isOpenparenthesis) {
+          data.push("(");
+        }
+        screen.innerText = data.join("");
+      }
+
     }
   });
 });
