@@ -20,8 +20,14 @@ btns.forEach((btn) => {
 
     userClicksOnEqualButton(buttonValue);
 
+    handlingZeroFollowedByAdecimal(buttonValue);
 
-    handlingZeroFollowedByAdecimal(buttonValue)
+    removesDecimalPointIfPrecededByAnOperator(buttonValue)
+
+
+
+
+   
 
     
 
@@ -30,19 +36,9 @@ btns.forEach((btn) => {
       data.push(screen.innerText);
       screen.innerText = data.join("");
     }
-    if (/[\/*\-+]/.test(buttonValue)) {
-      if (data.slice(-1)[0] === ".") {
-        data.pop();
-      }
-      buttonValue === "*"
-        ? (buttonValue = "x")
-        : buttonValue === "/"
-        ? (buttonValue = "÷")
-        : buttonValue;
 
-      data.push(buttonValue);
-      screen.innerText = data.join("");
-    }
+
+  
  
     
     
@@ -220,5 +216,21 @@ function insertClosingParenthesis(button) {
 function handlingZeroFollowedByAdecimal(button) {
   if (Number(button) === 0 && screen.innerText.startsWith("0.")) {
     screen.innerText += buttonValue;
+  }
+}
+
+function removesDecimalPointIfPrecededByAnOperator(button) {
+  if (/[\/*\-+]/.test(button)) {
+    if (data.slice(-1)[0] === ".") {
+      data.pop();
+    }
+    button === "*"
+      ? (button = "x")
+      : button === "/"
+      ? (button = "÷")
+      : button;
+
+    data.push(button);
+    screen.innerText = data.join("");
   }
 }
