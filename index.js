@@ -10,21 +10,10 @@ btns.forEach((btn) => {
 
     insertOpeningParenthesis(buttonValue);
 
-    insertClosingParenthesis(buttonValue)
+    insertClosingParenthesis(buttonValue);
 
-   
+    deleteEverythingFromScreen(buttonValue);
 
- 
-
-  
-
- 
-
-  
-
-    if (buttonValue === "AC") {
-      deleteEverythingFromScreen();
-    }
 
     if (Number(buttonValue) === 0 && screen.innerText.startsWith("0.")) {
       screen.innerText += buttonValue;
@@ -118,7 +107,6 @@ btns.forEach((btn) => {
     if (buttonValue === "DE") {
       deteLastEntry();
     }
-  
   });
 });
 
@@ -153,10 +141,12 @@ function canUserAddDot() {
   screen.innerText = data.join(" ");
 }
 
-function deleteEverythingFromScreen() {
-  screen.innerText = "";
-  data = [];
-  screen.innerText = 0;
+function deleteEverythingFromScreen(button) {
+  if (button === "AC") {
+    screen.innerText = "";
+    data = [];
+    screen.innerText = 0;
+  }
 }
 
 function toggleSign() {
