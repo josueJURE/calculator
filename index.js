@@ -8,16 +8,19 @@ btns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     let buttonValue = e.target.dataset.value;
 
-    insertOpeningParenthesis()
+    insertOpeningParenthesis(buttonValue);
+
+    insertClosingParenthesis(buttonValue)
+
+   
+
+ 
 
   
 
  
 
-    if (buttonValue === ")") {
-      data.push(")");
-      screen.innerText = data.join("");
-    }
+  
 
     if (buttonValue === "AC") {
       deleteEverythingFromScreen();
@@ -115,29 +118,7 @@ btns.forEach((btn) => {
     if (buttonValue === "DE") {
       deteLastEntry();
     }
-    function insertOpeningParenthesis() {
-      if (buttonValue === "(") {
-        let isOpenparenthesis = true;
-        for (let i = data.length - 1; i >= 0; i--) {
-          if (/^\d$/.test(data[i])) {
-            isOpenparenthesis = false;
-            break;
-          }
-          if (data[i] === ")") {
-            isOpenparenthesis = false;
-            break;
-          }
-          if (/[\/*\-+]/.test(data[i])) {
-            break;
-          }
-        }
-        if (isOpenparenthesis) {
-          data.push("(");
-        }
-        screen.innerText = data.join("");
-      }
-
-    }
+  
   });
 });
 
@@ -197,5 +178,35 @@ function toggleSign() {
         .concat(currentValue.toString().split(""), data.slice(end));
       screen.innerText = data.join("");
     }
+  }
+}
+
+function insertOpeningParenthesis(button) {
+  if (button === "(") {
+    let isOpenparenthesis = true;
+    for (let i = data.length - 1; i >= 0; i--) {
+      if (/^\d$/.test(data[i])) {
+        isOpenparenthesis = false;
+        break;
+      }
+      if (data[i] === ")") {
+        isOpenparenthesis = false;
+        break;
+      }
+      if (/[\/*\-+]/.test(data[i])) {
+        break;
+      }
+    }
+    if (isOpenparenthesis) {
+      data.push("(");
+    }
+    screen.innerText = data.join("");
+  }
+}
+
+function insertClosingParenthesis(button) {
+  if (button === ")") {
+    data.push(")");
+    screen.innerText = data.join("");
   }
 }
