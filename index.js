@@ -1,6 +1,12 @@
 const btns = document.querySelectorAll("[data-value]");
 let screen = document.querySelector("[data-screen]");
 const operators = document.querySelectorAll("[data-operator]");
+const operatorRegex = /[\/*\-+]/;
+
+
+
+
+
 
 let data = [];
 
@@ -30,71 +36,14 @@ btns.forEach((btn) => {
 
     convertToPercentage(buttonValue);
 
-    function userClicksOnEqualButton(button) {
-      if (button === "=") {
-        try {
-          const replacedArray = data.map((item) =>
-            item === "x" ? "*" : item === "÷" ? "/" : item
-          );
-          // Check if the expression involves 0/0
-          // if (areYouDivindingByZero(replacedArray)) {
-          //   screen.innerText = "You cannot divide by zero. Press AC";
-          // }
+    userClicksOnEqualButton(buttonValue)
 
-          if (areYouDividingdZeroByZero(replacedArray)) {
-            screen.innerText = "0÷0 is an invalid format. Press AC";
-          } else {
-            let result = eval(replacedArray.join(""));
-            console.log(result);
-            displayResult(replacedArray, result);
-            screen.innerText =
-              result === Infinity
-                ? "You cannot divide by zero. Press AC"
-                : result;
-            // divideByZero(screen, result);
-            data = [];
-            data.push(result);
-          }
-        } catch (e) {
-          screen.innerText = `${e.name} press AC`;
-        }
-      }
-    }
-
-    function areYouDivindingByZero(array) {
-      for (let i = 0; i < array.length - 2; i++) {
-        if (
-          !isNaN(Number(array[i])) &&
-          array[i + 1] === "/" &&
-          array[i + 2] === "0"
-        ) {
-          return true;
-        }
-      }
-      return false;
-    }
-
-    function areYouDividingdZeroByZero(array) {
-      for (let i = 0; i < array.length - 2; i++) {
-        if (array[i] === "0" && array[i + 1] === "/" && array[i + 2] === "0") {
-          return true;
-        }
-      }
-      return false;
-    }
-
-    function displayResult(array, outcome) {
-      array = [];
-      array.push(outcome);
-    }
-
-   
-
-  
   });
 });
 
 // end  of forEach() statement
+
+// functions creations
 
 function convertToPercentage(button) {
   if (button === "%") {
@@ -223,4 +172,66 @@ function handleNumberButton(button) {
     data.push(screen.innerText);
     screen.innerText = data.join("");
   }
+}
+
+
+//////
+
+
+function userClicksOnEqualButton(button) {
+  if (button === "=") {
+    try {
+      const replacedArray = data.map((item) =>
+        item === "x" ? "*" : item === "÷" ? "/" : item
+      );
+      // Check if the expression involves 0/0
+      // if (areYouDivindingByZero(replacedArray)) {
+      //   screen.innerText = "You cannot divide by zero. Press AC";
+      // }
+
+      if (areYouDividingdZeroByZero(replacedArray)) {
+        screen.innerText = "0÷0 is an invalid format. Press AC";
+      } else {
+        let result = eval(replacedArray.join(""));
+        console.log(result);
+        displayResult(replacedArray, result);
+        screen.innerText =
+          result === Infinity
+            ? "You cannot divide by zero. Press AC"
+            : result;
+        // divideByZero(screen, result);
+        data = [];
+        data.push(result);
+      }
+    } catch (e) {
+      screen.innerText = `${e.name} press AC`;
+    }
+  }
+}
+
+function areYouDivindingByZero(array) {
+  for (let i = 0; i < array.length - 2; i++) {
+    if (
+      !isNaN(Number(array[i])) &&
+      array[i + 1] === "/" &&
+      array[i + 2] === "0"
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function areYouDividingdZeroByZero(array) {
+  for (let i = 0; i < array.length - 2; i++) {
+    if (array[i] === "0" && array[i + 1] === "/" && array[i + 2] === "0") {
+      return true;
+    }
+  }
+  return false;
+}
+
+function displayResult(array, outcome) {
+  array = [];
+  array.push(outcome);
 }
