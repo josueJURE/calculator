@@ -14,6 +14,8 @@ btns.forEach((btn) => {
 
     deleteEverythingFromScreen(buttonValue);
 
+    toggleSign(buttonValue);
+
 
     if (Number(buttonValue) === 0 && screen.innerText.startsWith("0.")) {
       screen.innerText += buttonValue;
@@ -36,9 +38,9 @@ btns.forEach((btn) => {
       data.push(buttonValue);
       screen.innerText = data.join("");
     }
-    if (buttonValue === "minus") {
-      toggleSign();
-    }
+ 
+    
+    
 
 
     canUserAddDot(buttonValue);
@@ -110,6 +112,9 @@ btns.forEach((btn) => {
   });
 });
 
+// end  of forEach() statement
+
+
 function deteLastEntry() {
   let newArray = data.slice(0, -1);
   screen.innerText = newArray.join("");
@@ -151,26 +156,30 @@ function deleteEverythingFromScreen(button) {
   }
 }
 
-function toggleSign() {
-  let currentExpression = data.join("");
-  let reversedExpression = currentExpression.split("").reverse().join("");
-  let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
-  // debugger
-
-  if (match) {
-    let start = currentExpression.length - match[0].length;
-    let end = currentExpression.length;
-    let currentValue = Number(match[0]);
-
-    if (!isNaN(currentValue)) {
-      // If it's a number, toggle its sign
-      currentValue = -currentValue;
-      data = data
-        .slice(0, start)
-        .concat(currentValue.toString().split(""), data.slice(end));
-      screen.innerText = data.join("");
+function toggleSign(button) {
+  if(button === "minus") {
+    let currentExpression = data.join("");
+    let reversedExpression = currentExpression.split("").join("");
+    let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
+    // debugger
+  
+    if (match) {
+      let start = currentExpression.length - match[0].length;
+      let end = currentExpression.length;
+      let currentValue = Number(match[0]);
+  
+      if (!isNaN(currentValue)) {
+        // If it's a number, toggle its sign
+        currentValue = -currentValue;
+        data = data
+          .slice(0, start)
+          .concat(currentValue.toString().split(""), data.slice(end));
+        screen.innerText = data.join("");
+      }
     }
+
   }
+
 }
 
 function insertOpeningParenthesis(button) {
