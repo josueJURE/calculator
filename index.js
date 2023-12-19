@@ -22,59 +22,40 @@ btns.forEach((btn) => {
 
     handlingZeroFollowedByAdecimal(buttonValue);
 
-    removesDecimalPointIfPrecededByAnOperator(buttonValue)
+    removesDecimalPointIfPrecededByAnOperator(buttonValue);
 
+    handleNumberButton(buttonValue);
 
+    function userClicksOnEqualButton(button) {
+      if (button === "=") {
+        try {
+          const replacedArray = data.map((item) =>
+            item === "x" ? "*" : item === "÷" ? "/" : item
+          );
+          // Check if the expression involves 0/0
+          // if (areYouDivindingByZero(replacedArray)) {
+          //   screen.innerText = "You cannot divide by zero. Press AC";
+          // }
 
-
-   
-
-    
-
-    if (!isNaN(Number(buttonValue))) {
-      screen.innerText = buttonValue;
-      data.push(screen.innerText);
-      screen.innerText = data.join("");
-    }
-
-
-  
- 
-    
-    
-
-function userClicksOnEqualButton(button) {
-  if (button === "=") {
-    try {
-      const replacedArray = data.map((item) => item === "x" ? "*" : item === "÷" ? "/" : item);
-      // Check if the expression involves 0/0
-      // if (areYouDivindingByZero(replacedArray)) {
-      //   screen.innerText = "You cannot divide by zero. Press AC";
-      // }
-
-      if (areYouDividingdZeroByZero(replacedArray)) {
-        screen.innerText = "0÷0 is an invalid format. Press AC";
-      } else {
-        let result = eval(replacedArray.join(""));
-        console.log(result);
-        displayResult(replacedArray, result);
-        screen.innerText =
-          result === Infinity
-            ? "You cannot divide by zero. Press AC"
-            : result;
-        // divideByZero(screen, result);
-        data = [];
-        data.push(result);
+          if (areYouDividingdZeroByZero(replacedArray)) {
+            screen.innerText = "0÷0 is an invalid format. Press AC";
+          } else {
+            let result = eval(replacedArray.join(""));
+            console.log(result);
+            displayResult(replacedArray, result);
+            screen.innerText =
+              result === Infinity
+                ? "You cannot divide by zero. Press AC"
+                : result;
+            // divideByZero(screen, result);
+            data = [];
+            data.push(result);
+          }
+        } catch (e) {
+          screen.innerText = `${e.name} press AC`;
+        }
       }
-    } catch (e) {
-      screen.innerText = `${e.name} press AC`;
     }
-  }
-
-}
-  
-
-   
 
     function areYouDivindingByZero(array) {
       for (let i = 0; i < array.length - 2; i++) {
@@ -115,7 +96,6 @@ function userClicksOnEqualButton(button) {
 
 // end  of forEach() statement
 
-
 function deteLastEntry() {
   let newArray = data.slice(0, -1);
   screen.innerText = newArray.join("");
@@ -126,7 +106,7 @@ function deteLastEntry() {
 }
 
 function canUserAddDot(button) {
-  if(button === ".") {
+  if (button === ".") {
     var dotAllowed = true;
     for (var i = data.length - 1; i >= 0; i--) {
       console.log("data > " + data[i]);
@@ -158,17 +138,17 @@ function deleteEverythingFromScreen(button) {
 }
 
 function toggleSign(button) {
-  if(button === "minus") {
+  if (button === "minus") {
     let currentExpression = data.join("");
     let reversedExpression = currentExpression.split("").join("");
     let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
     // debugger
-  
+
     if (match) {
       let start = currentExpression.length - match[0].length;
       let end = currentExpression.length;
       let currentValue = Number(match[0]);
-  
+
       if (!isNaN(currentValue)) {
         // If it's a number, toggle its sign
         currentValue = -currentValue;
@@ -178,9 +158,7 @@ function toggleSign(button) {
         screen.innerText = data.join("");
       }
     }
-
   }
-
 }
 
 function insertOpeningParenthesis(button) {
@@ -224,13 +202,17 @@ function removesDecimalPointIfPrecededByAnOperator(button) {
     if (data.slice(-1)[0] === ".") {
       data.pop();
     }
-    button === "*"
-      ? (button = "x")
-      : button === "/"
-      ? (button = "÷")
-      : button;
+    button === "*" ? (button = "x") : button === "/" ? (button = "÷") : button;
 
     data.push(button);
+    screen.innerText = data.join("");
+  }
+}
+
+function handleNumberButton(button) {
+  if (!isNaN(Number(button))) {
+    screen.innerText = button;
+    data.push(screen.innerText);
     screen.innerText = data.join("");
   }
 }
