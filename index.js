@@ -26,6 +26,10 @@ btns.forEach((btn) => {
 
     handleNumberButton(buttonValue);
 
+    deteLastEntry(buttonValue);
+
+    convertToPercentage(buttonValue);
+
     function userClicksOnEqualButton(button) {
       if (button === "=") {
         try {
@@ -84,18 +88,22 @@ btns.forEach((btn) => {
       array.push(outcome);
     }
 
-    if (buttonValue === "%") {
-      screen.innerText = screen.innerText / 100;
-    }
+   
 
-    deteLastEntry(buttonValue);
+  
   });
 });
 
 // end  of forEach() statement
 
+function convertToPercentage(button) {
+  if (button === "%") {
+    screen.innerText = screen.innerText / 100;
+  }
+}
+
 function deteLastEntry(button) {
-  if(button === "DE") {
+  if (button === "DE") {
     let newArray = data.slice(0, -1);
     screen.innerText = newArray.join("");
     data = newArray;
@@ -103,7 +111,6 @@ function deteLastEntry(button) {
       screen.innerText = 0;
     }
   }
-
 }
 
 function canUserAddDot(button) {
