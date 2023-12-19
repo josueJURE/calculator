@@ -7,16 +7,6 @@ let data = [];
 btns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     let buttonValue = e.target.dataset.value;
-    // if (buttonValue === "(") {
-    //   let isOpenParenthesis = true;
-    //   for (let i = data.length - 1; i >= 0; i--) {
-    //     if (/^\d$/.test(data[i])) { // Use /^\d$/ to match a single digit
-    //       isOpenParenthesis = false;
-    //       break; // Exit the loop as soon as a digit is found
-    //     }
-    //   }
-    //   // Rest of your code...
-    // }
 
     if (buttonValue === "(") {
       let isOpenparenthesis = true;
@@ -60,8 +50,12 @@ btns.forEach((btn) => {
       if (data.slice(-1)[0] === ".") {
         data.pop();
       }
-      buttonValue === "*" ? buttonValue = "x" : buttonValue === "/" ? buttonValue = "÷" : buttonValue;
-    
+      buttonValue === "*"
+        ? (buttonValue = "x")
+        : buttonValue === "/"
+        ? (buttonValue = "÷")
+        : buttonValue;
+
       data.push(buttonValue);
       screen.innerText = data.join("");
     }
@@ -73,18 +67,27 @@ btns.forEach((btn) => {
       canUserAddDot();
     }
 
- 
     if (buttonValue === "=") {
       try {
-        const replacedArray = data.map((item) => (item === "x" ? "*" : item === "÷" ? "/" : item));
+        const replacedArray = data.map((item) =>
+          item === "x" ? "*" : item === "÷" ? "/" : item
+        );
         // Check if the expression involves 0/0
-        if (hasZeroDividedByZero(replacedArray)) {
-          screen.innerText = "Invalid format used. You cannot divide by zero";
+        // if (areYouDivindingByZero(replacedArray)) {
+        //   screen.innerText = "You cannot divide by zero. Press AC";
+        // }
+
+        if (areYouDividingdZeroByZero(replacedArray)) {
+          screen.innerText = "0÷0 is an invalid format. Press AC";
         } else {
           let result = eval(replacedArray.join(""));
           console.log(result);
           displayResult(replacedArray, result);
-          divideByZero(screen, result);
+          screen.innerText =
+            result === Infinity
+              ? "You cannot divide by zero. Press AC"
+              : result;
+          // divideByZero(screen, result);
           data = [];
           data.push(result);
         }
@@ -92,15 +95,21 @@ btns.forEach((btn) => {
         screen.innerText = `${e.name} press AC`;
       }
     }
- 
 
-    function divideByZero(display, outcome) {
-      outcome === Infinity
-        ? (display.innerText = "Math Error. Cannot divide by zero")
-        : (display.innerText = outcome);
+    function areYouDivindingByZero(array) {
+      for (let i = 0; i < array.length - 2; i++) {
+        if (
+          !isNaN(Number(array[i])) &&
+          array[i + 1] === "/" &&
+          array[i + 2] === "0"
+        ) {
+          return true;
+        }
+      }
+      return false;
     }
 
-    function hasZeroDividedByZero(array) {
+    function areYouDividingdZeroByZero(array) {
       for (let i = 0; i < array.length - 2; i++) {
         if (array[i] === "0" && array[i + 1] === "/" && array[i + 2] === "0") {
           return true;
@@ -108,7 +117,7 @@ btns.forEach((btn) => {
       }
       return false;
     }
-   
+
     function displayResult(array, outcome) {
       array = [];
       array.push(outcome);
@@ -175,12 +184,10 @@ function toggleSign() {
     if (!isNaN(currentValue)) {
       // If it's a number, toggle its sign
       currentValue = -currentValue;
-      data = data.slice(0, start).concat(currentValue.toString().split(""), data.slice(end));
+      data = data
+        .slice(0, start)
+        .concat(currentValue.toString().split(""), data.slice(end));
       screen.innerText = data.join("");
     }
   }
 }
-
-
-
-
