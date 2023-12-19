@@ -70,14 +70,14 @@ function canUserAddDot(button) {
       if (data[i] === ".") {
         dotAllowed = false;
         break;
-      } else if (/[\/*\-+]/.test(data[i])) {
+      } else if (operatorRegex.test(data[i])) {
         break;
       }
     }
     if (dotAllowed) {
       if (data.length == 0) {
         data.push("0");
-      } else if (/[\/*\-+]/.test(data[data.length - 1])) {
+      } else if (operatorRegex.test(data[data.length - 1])) {
         data.push("0");
       }
       data.push(".");
@@ -130,7 +130,7 @@ function insertOpeningParenthesis(button) {
         isOpenparenthesis = false;
         break;
       }
-      if (/[\/*\-+]/.test(data[i])) {
+      if (operatorRegex.test(data[i])) {
         break;
       }
     }
@@ -155,7 +155,7 @@ function handlingZeroFollowedByAdecimal(button) {
 }
 
 function removesDecimalPointIfPrecededByAnOperator(button) {
-  if (/[\/*\-+]/.test(button)) {
+  if (operatorRegex.test(button)) {
     if (data.slice(-1)[0] === ".") {
       data.pop();
     }
