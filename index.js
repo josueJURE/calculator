@@ -3,11 +3,6 @@ let screen = document.querySelector("[data-screen]");
 const operators = document.querySelectorAll("[data-operator]");
 const operatorRegex = /[\/*\-+]/;
 
-
-
-
-
-
 let data = [];
 
 btns.forEach((btn) => {
@@ -36,15 +31,10 @@ btns.forEach((btn) => {
 
     convertToPercentage(buttonValue);
 
-    userClicksOnEqualButton(buttonValue)
-
+    userClicksOnEqualButton(buttonValue);
   });
 });
-
-// end  of forEach() statement
-
-// functions creations
-
+// forEach ends & functions creations begins
 function convertToPercentage(button) {
   if (button === "%") {
     screen.innerText = screen.innerText / 100;
@@ -150,7 +140,7 @@ function insertClosingParenthesis(button) {
 
 function handlingZeroFollowedByAdecimal(button) {
   if (Number(button) === 0 && screen.innerText.startsWith("0.")) {
-    screen.innerText += buttonValue;
+    screen.innerText += button;
   }
 }
 
@@ -174,10 +164,6 @@ function handleNumberButton(button) {
   }
 }
 
-
-//////
-
-
 function userClicksOnEqualButton(button) {
   if (button === "=") {
     try {
@@ -196,9 +182,7 @@ function userClicksOnEqualButton(button) {
         console.log(result);
         displayResult(replacedArray, result);
         screen.innerText =
-          result === Infinity
-            ? "You cannot divide by zero. Press AC"
-            : result;
+          result === Infinity ? "You cannot divide by zero. Press AC" : result;
         // divideByZero(screen, result);
         data = [];
         data.push(result);
@@ -235,3 +219,4 @@ function displayResult(array, outcome) {
   array = [];
   array.push(outcome);
 }
+// functions creations ends
