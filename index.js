@@ -74,7 +74,7 @@ function canUserAddDot(button) {
       }
       data.push(".");
     }
-    screen.innerText = data.join(" ");
+    screen.innerText = data.join("");
   }
 }
 
