@@ -31,7 +31,7 @@ btns.forEach((btn) => {
 
     convertToPercentage(buttonValue);
 
-    userClicksOnEqualButton(buttonValue);
+  
   });
 });
 // forEach ends & functions creations begins
