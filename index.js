@@ -45,11 +45,11 @@ function convertToPercentage(button) {
 
 function deteLastEntry(button) {
   if (button === "DE") {
-    let newArray = data.slice(0, -1);
+    let newArray = data.slice(ZERO, -1);
     screen.innerText = newArray.join("");
     data = newArray;
     if (screen.innerText === "") {
-      screen.innerText = 0;
+      screen.innerText = ZERO;
     }
   }
 }
@@ -57,7 +57,7 @@ function deteLastEntry(button) {
 function canUserAddDot(button) {
   if (button === ".") {
     var dotAllowed = true;
-    for (var i = data.length - 1; i >= 0; i--) {
+    for (var i = data.length - 1; i >= ZERO; i--) {
       console.log("data > " + data[i]);
       if (data[i] === ".") {
         dotAllowed = false;
@@ -67,7 +67,7 @@ function canUserAddDot(button) {
       }
     }
     if (dotAllowed) {
-      if (data.length == 0) {
+      if (data.length == ZERO) {
         data.push("0");
       } else if (operatorRegex.test(data[data.length - 1])) {
         data.push("0");
@@ -82,7 +82,7 @@ function deleteEverythingFromScreen(button) {
   if (button === "AC") {
     screen.innerText = "";
     data = [];
-    screen.innerText = 0;
+    screen.innerText = ZERO;
   }
 }
 
@@ -94,15 +94,15 @@ function toggleSign(button) {
     // debugger
 
     if (match) {
-      let start = currentExpression.length - match[0].length;
+      let start = currentExpression.length - match[ZERO].length;
       let end = currentExpression.length;
-      let currentValue = Number(match[0]);
+      let currentValue = Number(match[ZERO]);
 
       if (!isNaN(currentValue)) {
         // If it's a number, toggle its sign
         currentValue = -currentValue;
         data = data
-          .slice(0, start)
+          .slice(ZERO, start)
           .concat(currentValue.toString().split(""), data.slice(end));
         screen.innerText = data.join("");
       }
@@ -113,7 +113,7 @@ function toggleSign(button) {
 function insertOpeningParenthesis(button) {
   if (button === "(") {
     let isOpenparenthesis = true;
-    for (let i = data.length - 1; i >= 0; i--) {
+    for (let i = data.length - 1; i >= ZERO; i--) {
       if (/^\d$/.test(data[i])) {
         isOpenparenthesis = false;
         break;
@@ -148,7 +148,7 @@ function handlingZeroFollowedByAdecimal(button) {
 
 function removesDecimalPointIfPrecededByAnOperator(button) {
   if (operatorRegex.test(button)) {
-    if (data.slice(-1)[0] === ".") {
+    if (data.slice(-1)[ZERO] === ".") {
       data.pop();
     }
     button === "*" ? (button = "x") : button === "/" ? (button = "÷") : button;
@@ -196,7 +196,7 @@ function userClicksOnEqualButton(button) {
 }
 
 function areYouDivindingByZero(array) {
-  for (let i = 0; i < array.length - 2; i++) {
+  for (let i = ZERO; i < array.length - 2; i++) {
     if (
       !isNaN(Number(array[i])) &&
       array[i + 1] === "/" &&
@@ -209,7 +209,7 @@ function areYouDivindingByZero(array) {
 }
 
 function areYouDividingdZeroByZero(array) {
-  for (let i = 0; i < array.length - 2; i++) {
+  for (let i = ZERO; i < array.length - 2; i++) {
     if (array[i] === "0" && array[i + 1] === "/" && array[i + 2] === "0") {
       return true;
     }
