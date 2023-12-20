@@ -2,6 +2,8 @@ const btns = document.querySelectorAll("[data-value]");
 let screen = document.querySelector("[data-screen]");
 const operators = document.querySelectorAll("[data-operator]");
 const operatorRegex = /[\/*\-+]/;
+const ZERO = 0;
+const ZERO_DOT = '0.';
 
 let data = [];
 
@@ -139,7 +141,7 @@ function insertClosingParenthesis(button) {
 }
 
 function handlingZeroFollowedByAdecimal(button) {
-  if (Number(button) === 0 && screen.innerText.startsWith("0.")) {
+  if (Number(button) === ZERO && screen.innerText.startsWith(ZERO_DOT)) {
     screen.innerText += button;
   }
 }
