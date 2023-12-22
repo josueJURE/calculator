@@ -183,8 +183,7 @@ function userClicksOnEqualButton(button) {
         let result = eval(replacedArray.join(""));
         console.log(result);
         displayResult(replacedArray, result);
-        screen.innerText =
-          result === Infinity ? "You cannot divide by zero. Press AC" : result;
+        screen.innerText = !Number.isFinite(result) ? "You cannot divide by zero. Press AC" : result;
         // divideByZero(screen, result);
         data = [];
         data.push(result);
