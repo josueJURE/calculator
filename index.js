@@ -4,6 +4,7 @@ const operators = document.querySelectorAll("[data-operator]");
 const operatorRegex = /[\/*\-+]/;
 const ZERO = 0;
 const ZERO_DOT = '0.';
+const history = [];
 
 let data = [];
 
