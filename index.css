@@ -45,6 +45,9 @@ body {
   row-gap: 10px;
   padding: 10px;
   background-color: rgb(27 22 22 / 39%);
+  transform: translateX(0px);
+  transition: transform 2s;
+  
   
 }
 .history-btn,
@@ -57,8 +60,9 @@ body {
 }
 
 .sliding-part.slide {
-  transform: translateX(-200px);
+  transform: translateX(200px);
   transition: transform 2s;
+
 
 }
 
