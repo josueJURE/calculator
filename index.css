@@ -46,15 +46,20 @@ body {
   padding: 10px;
   background-color: rgb(27 22 22 / 39%);
   
-
 }
-.history,
+.history-btn,
 .child {
   border: 1px black solid;
   display: grid;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
+}
+
+.sliding-part.slide {
+  transform: translateX(-200px);
+  transition: transform 2s;
+
 }
 
 .screen {
