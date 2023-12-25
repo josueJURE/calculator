@@ -4,6 +4,7 @@ const operators = document.querySelectorAll("[data-operator]");
 const operatorRegex = /[\/*\-+]/;
 const ZERO = 0;
 const ZERO_DOT = '0.';
+const history = [];
 
 let data = [];
 
@@ -181,7 +182,10 @@ function userClicksOnEqualButton(button) {
         screen.innerText = "0÷0 is an invalid format. Press AC";
       } else {
         let result = eval(replacedArray.join(""));
-        console.log(result);
+        replacedArray.splice(replacedArray.length, 0, "=", result);
+        history.push(replacedArray.join(""))
+        console.log(history);
+
         displayResult(replacedArray, result);
         screen.innerText = !Number.isFinite(result) ? "You cannot divide by zero. Press AC" : result;
         // divideByZero(screen, result);
