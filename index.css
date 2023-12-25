@@ -30,6 +30,7 @@ body {
   background-color: rgb(27 22 22 / 39%);
 }
 
+.history,
 .child {
   border: 1px black solid;
   display: grid;
