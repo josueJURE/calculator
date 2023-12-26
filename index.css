@@ -23,13 +23,29 @@ body {
   border-radius: 15px;
   overflow: hidden;
   display: grid;
+  background-color: rgb(27 22 22 / 39%);
+  justify-content: center;
+
+}
+
+.sliding-part {
+  height: 530px;
+  width: 400px;
+  border: black 1px solid;
+  border-radius: 15px;
+  overflow: hidden;
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 10px;
   row-gap: 10px;
   padding: 10px;
   background-color: rgb(27 22 22 / 39%);
+  transform: translateX(0px);
+  transition: transform 2s;
+  
+  
 }
-
+.history-btn,
 .child {
   border: 1px black solid;
   display: grid;
@@ -38,7 +54,15 @@ body {
   border-radius: 15px;
 }
 
+.sliding-part.slide {
+  transform: translateX(200px);
+  transition: transform 2s;
+
+
+}
+
 .screen {
+  height: 70px;
   grid-column-start: 1;
   grid-column-end: 5;
   border-radius: 15px;
