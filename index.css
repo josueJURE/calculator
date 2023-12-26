@@ -26,6 +26,7 @@ body {
 }
 
 .sliding-part {
+  position: absolute;
   height: 530px;
   width: 400px;
   border: black 1px solid;
@@ -42,6 +43,7 @@ body {
 }
 
 .computation-history {
+
   height: 530px;
   width: 400px;
   
