@@ -44,10 +44,15 @@ body {
 }
 
 .computation-history {
-
   height: 530px;
   width: 400px;
-  
+  display: flex;
+  display: flex;
+  visibility: hidden;
+}
+
+.computation-history.visility {
+  visibility: visible;
 }
   
 

@@ -16,6 +16,7 @@ console.log(slidingPart)
 
 historyBtn.addEventListener("click", () => {
   slidingPart.classList.toggle("slide")
+  computationHistory.classList.toggle("visility")
 })
 
 
