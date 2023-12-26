@@ -17,6 +17,7 @@ body {
 }
 
 .parent {
+  position: relative;
   height: 600px;
   width: 400px;
   border: black 1px solid;
