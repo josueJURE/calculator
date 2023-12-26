@@ -205,11 +205,13 @@ function userClicksOnEqualButton(button) {
         history.push(replacedArray.join(""))
         console.log(history);
 
+
         displayResult(replacedArray, result);
         screen.innerText = !Number.isFinite(result) ? "You cannot divide by zero. Press AC" : result;
         // divideByZero(screen, result);
         data = [];
         data.push(result);
+        computationHistory.innerHTML += `<li>${history}</li>`
       }
     } catch (e) {
       screen.innerText = `${e.name} press AC`;
