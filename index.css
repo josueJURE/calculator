@@ -29,7 +29,7 @@ body {
 }
 
 .sliding-part {
-  height: 550px;
+  height: 530px;
   width: 400px;
   border: black 1px solid;
   border-radius: 15px;
@@ -62,7 +62,7 @@ body {
 }
 
 .screen {
-  height: 50px;
+  height: 70px;
   grid-column-start: 1;
   grid-column-end: 5;
   border-radius: 15px;
