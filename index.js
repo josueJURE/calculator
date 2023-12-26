@@ -1,8 +1,10 @@
 const btns = document.querySelectorAll("[data-value]");
+const computationHistory = document.querySelector(".computation-history");
 let screen = document.querySelector("[data-screen]");
 const historyBtn = document.querySelector(".history-btn");
 const slidingPart = document.querySelector(".sliding-part");
 const operators = document.querySelectorAll("[data-operator]");
+
 
 const operatorRegex = /[\/*\-+]/;
 const ZERO = 0;
@@ -14,8 +16,10 @@ console.log(slidingPart)
 
 historyBtn.addEventListener("click", () => {
   slidingPart.classList.toggle("slide")
-  console.log("history btn")
 })
+
+
+console.log(computationHistory )
 
 
 

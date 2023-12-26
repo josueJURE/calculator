@@ -22,10 +22,7 @@ body {
   border: black 1px solid;
   border-radius: 15px;
   overflow: hidden;
-  display: grid;
   background-color: rgb(27 22 22 / 39%);
-  justify-content: center;
-
 }
 
 .sliding-part {
@@ -42,9 +39,15 @@ body {
   background-color: rgb(27 22 22 / 39%);
   transform: translateX(0px);
   transition: transform 2s;
-  
+}
+
+.computation-history {
+  height: 530px;
+  width: 400px;
   
 }
+  
+
 .history-btn,
 .child {
   border: 1px black solid;
@@ -87,4 +90,6 @@ body {
   grid-column-start: 1;
   grid-column-end: 2;
 }
+
+
 
