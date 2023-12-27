@@ -9,6 +9,7 @@ const operators = document.querySelectorAll("[data-operator]");
 const operatorRegex = /[\/*\-+]/;
 const ZERO = 0;
 const ZERO_DOT = '0.';
+const HISTORY_LIMIT = 10;
 const history = [];
 
 console.log(slidingPart)
@@ -265,13 +266,10 @@ function displayResult(array, outcome) {
 
 function createHistoryList(array, element, history) {
   array.forEach((entry, index) => {
-  
     history.push(entry);
-   
     element.innerHTML += `<li> ${entry.join(" ")}</li>`
-    if(element.childElementCount > 10) {
-      console.log("hi")
-      element.firstElementChild.remove()
+    if(element.childElementCount > HISTORY_LIMIT) {
+      element.firstElementChild.remove();
     }
   });
 }
