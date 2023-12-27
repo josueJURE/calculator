@@ -218,12 +218,24 @@ function userClicksOnEqualButton(button) {
         // divideByZero(screen, result);
         data = [];
         data.push(result);
-        historyEntries.forEach(entry => {
+        historyEntries.forEach((entry, index) => {
           console.log(entry);
           history.push(entry);
+          if(history.length > 3) {
+            history.pop()
+          }
           console.log(history);
-          historyElement.innerHTML += `<li>${entry.join(" ")}</li>`
+          historyElement.innerHTML += `<li> ${entry.join(" ")}</li>`
+          if(historyElement.childElementCount > 10) {
+            console.log("hi")
+            historyElement.firstElementChild.remove()
+
+          }
+       
         });
+
+       
+      
       
       }
     } catch (e) {
