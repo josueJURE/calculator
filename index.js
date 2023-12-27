@@ -203,24 +203,20 @@ function userClicksOnEqualButton(button) {
         screen.innerText = "0÷0 is an invalid format. Press AC";
       } else {
         let result = eval(replacedArray.join(""));
-        let historyEntries = [...replacedArray, "=", result];
+        let historyEntries = [[...replacedArray, "=", result]];
         // let computationHistory = replacedArray.slice();
+
+        console.log(historyEntries)
      
         replacedArray.splice(replacedArray.length, 0, "=", result);
         // history.push(replacedArray.join(""));
      
-        console.log(historyEntries)
-        historyEntries.forEach(entry => {
-          history.push(entry);
-          console.log(history.join(" "))
-          historyElement.innerHTML += history
-        })
-
-        historyElement.innerHTML += history.join(" ")
+   
+      
 
        
-        
-        console.log(history);
+
+     
 
 
         displayResult(replacedArray, result);
@@ -228,10 +224,16 @@ function userClicksOnEqualButton(button) {
         // divideByZero(screen, result);
         data = [];
         data.push(result);
+        historyEntries.forEach(entry => {
+          console.log(entry);
+          history.push(entry);
+          console.log(history);
+          historyElement.innerHTML += `<li>${entry.join("")}</li>`
+        });
       
       }
     } catch (e) {
-      debugger
+      // debugger
       screen.innerText = `${e.name} press AC`;
     }
   }
