@@ -49,6 +49,8 @@ body {
   display: flex;
   flex-direction: column;
   visibility: hidden;
+  padding-left: 10px;
+  padding-top: 10px;
 }
 
 .computation-history.visility {

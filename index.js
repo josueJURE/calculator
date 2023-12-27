@@ -213,12 +213,6 @@ function userClicksOnEqualButton(button) {
      
    
       
-
-       
-
-     
-
-
         displayResult(replacedArray, result);
         screen.innerText = !Number.isFinite(result) ? "You cannot divide by zero. Press AC" : result;
         // divideByZero(screen, result);
