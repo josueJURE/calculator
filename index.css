@@ -47,7 +47,7 @@ body {
   height: 530px;
   width: 400px;
   display: flex;
-  display: flex;
+  flex-direction: column;
   visibility: hidden;
 }
 

@@ -1,5 +1,5 @@
 const btns = document.querySelectorAll("[data-value]");
-const computationHistory = document.querySelector(".computation-history");
+const historyElement = document.querySelector(".computation-history");
 let screen = document.querySelector("[data-screen]");
 const historyBtn = document.querySelector(".history-btn");
 const slidingPart = document.querySelector(".sliding-part");
@@ -16,11 +16,11 @@ console.log(slidingPart)
 
 historyBtn.addEventListener("click", () => {
   slidingPart.classList.toggle("slide")
-  computationHistory.classList.toggle("visility")
+  historyElement.classList.toggle("visility")
 })
 
 
-console.log(computationHistory )
+
 
 
 
@@ -192,6 +192,8 @@ function userClicksOnEqualButton(button) {
       const replacedArray = data.map((item) =>
         item === "x" ? "*" : item === "÷" ? "/" : item
       );
+     
+      // console.log(historyEntries)
       // Check if the expression involves 0/0
       // if (areYouDivindingByZero(replacedArray)) {
       //   screen.innerText = "You cannot divide by zero. Press AC";
@@ -201,8 +203,23 @@ function userClicksOnEqualButton(button) {
         screen.innerText = "0÷0 is an invalid format. Press AC";
       } else {
         let result = eval(replacedArray.join(""));
+        let historyEntries = [...replacedArray, "=", result];
+        // let computationHistory = replacedArray.slice();
+     
         replacedArray.splice(replacedArray.length, 0, "=", result);
-        history.push(replacedArray.join(""))
+        // history.push(replacedArray.join(""));
+     
+        console.log(historyEntries)
+        historyEntries.forEach(entry => {
+          history.push(entry);
+          console.log(history.join(" "))
+          historyElement.innerHTML += history
+        })
+
+        historyElement.innerHTML += history.join(" ")
+
+       
+        
         console.log(history);
 
 
@@ -211,9 +228,10 @@ function userClicksOnEqualButton(button) {
         // divideByZero(screen, result);
         data = [];
         data.push(result);
-        computationHistory.innerHTML += `<li>${history}</li>`
+      
       }
     } catch (e) {
+      debugger
       screen.innerText = `${e.name} press AC`;
     }
   }
