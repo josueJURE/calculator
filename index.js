@@ -222,7 +222,7 @@ function userClicksOnEqualButton(button) {
           console.log(entry);
           history.push(entry);
           console.log(history);
-          historyElement.innerHTML += `<li>${entry.join("")}</li>`
+          historyElement.innerHTML += `<li>${entry.join(" ")}</li>`
         });
       
       }
