@@ -218,21 +218,11 @@ function userClicksOnEqualButton(button) {
         // divideByZero(screen, result);
         data = [];
         data.push(result);
-        historyEntries.forEach((entry, index) => {
-          console.log(entry);
-          history.push(entry);
-          if(history.length > 3) {
-            history.pop()
-          }
-          console.log(history);
-          historyElement.innerHTML += `<li> ${entry.join(" ")}</li>`
-          if(historyElement.childElementCount > 10) {
-            console.log("hi")
-            historyElement.firstElementChild.remove()
 
-          }
-       
-        });
+        createHistoryList(historyEntries, historyElement, history)
+
+  
+      
 
        
       
@@ -271,4 +261,20 @@ function displayResult(array, outcome) {
   array = [];
   array.push(outcome);
 }
+
+
+function createHistoryList(array, element, history) {
+  array.forEach((entry, index) => {
+  
+    history.push(entry);
+   
+    element.innerHTML += `<li> ${entry.join(" ")}</li>`
+    if(element.childElementCount > 10) {
+      console.log("hi")
+      element.firstElementChild.remove()
+    }
+  });
+}
+
+
 // functions creations ends
