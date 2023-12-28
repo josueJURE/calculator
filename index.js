@@ -23,7 +23,7 @@ console.log(slidingPart)
 
 historyBtn.addEventListener("click", () => {
   slidingPart.classList.toggle("slide")
-  computationHistoryParent.classList.toggle("visility")
+  computationHistoryParent.classList.toggle("visility");
 })
 
 
@@ -227,6 +227,9 @@ function userClicksOnEqualButton(button) {
         data.push(result);
 
         createHistoryList(historyEntries, historyElement, history)
+        
+        // debugger
+    
 
   
       
@@ -277,6 +280,11 @@ function createHistoryList(array, element, history) {
     if(element.childElementCount > HISTORY_LIMIT) {
       element.firstElementChild.remove();
     }
+    if(element.childElementCount > 0) {
+      clearHistoryBtn.classList.toggle("display");
+      console.log(historyElement.childElementCount)
+    }
+
   });
 }
 

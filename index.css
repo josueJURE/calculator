@@ -46,7 +46,10 @@ body {
 
 .computation-history-parent {
   visibility: hidden;
+}
 
+.computation-history-parent.visility {
+  visibility: visible;
 }
 
 .computation-history {
@@ -58,15 +61,19 @@ body {
   padding-top: 10px;
 }
 
-.computation-history-parent.visility {
-  visibility: visible;
-}
+
 
 .clear-history-btn {
   width: 100px;
   margin-left: 10px;
   border-radius: 15px;
-  
+  display: none;
+
+}
+
+.clear-history-btn.display {
+  display: block;
+ 
 }
 
   
