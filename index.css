@@ -45,18 +45,26 @@ body {
 }
 
 .computation-history {
-  height: 530px;
+  height: 490px;
   width: 400px;
   display: flex;
   flex-direction: column;
   visibility: hidden;
-  padding-left: 10px;
+  margin-left: 10px;
   padding-top: 10px;
 }
 
 .computation-history.visility {
   visibility: visible;
 }
+
+.clear-history-btn {
+  width: 100px;
+  margin-left: 10px;
+  border-radius: 15px;
+  
+}
+
   
 
 .history-btn,
