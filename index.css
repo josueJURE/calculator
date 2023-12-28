@@ -57,16 +57,19 @@ body {
   width: 400px;
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
   padding-top: 10px;
   row-gap: 10px;
+}
+
+.computation-history-parent > * {
+  margin-left: 10px;
 }
 
 
 
 .clear-history-btn {
   width: 100px;
-  margin-left: 10px;
+
   border-radius: 15px;
   display: none;
 
