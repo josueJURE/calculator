@@ -4,6 +4,8 @@ let screen = document.querySelector("[data-screen]");
 const historyBtn = document.querySelector(".history-btn");
 const slidingPart = document.querySelector(".sliding-part");
 const operators = document.querySelectorAll("[data-operator]");
+const clearHistoryBtn = document.querySelector(".clear-history-btn");
+
 
 
 const operatorRegex = /[\/*\-+]/;
