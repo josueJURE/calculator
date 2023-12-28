@@ -8,7 +8,7 @@ const operators = document.querySelectorAll("[data-operator]");
 const clearHistoryBtn = document.querySelector(".clear-history-btn");
 
 
-console.log(computationHistoryParent);
+console.log(clearHistoryBtn);
 
 
 
@@ -60,6 +60,8 @@ btns.forEach((btn) => {
 
     convertToPercentage(buttonValue);
 
+ 
+
   
   });
 });
@@ -69,6 +71,12 @@ function convertToPercentage(button) {
     screen.innerText = screen.innerText / 100;
   }
 }
+
+clearHistoryBtn.addEventListener("click", () => {
+  
+  historyElement.innerHTML = ""
+  console.log(historyElement.childElementCount)
+})
 
 function deteLastEntry(button) {
   if (button === "DE") {
@@ -226,7 +234,9 @@ function userClicksOnEqualButton(button) {
         data = [];
         data.push(result);
 
-        createHistoryList(historyEntries, historyElement, history)
+        createHistoryList(historyEntries, historyElement, history);
+
+        togglesClearHistoryButton(historyElement, clearHistoryBtn);
         
         // debugger
     
@@ -280,12 +290,15 @@ function createHistoryList(array, element, history) {
     if(element.childElementCount > HISTORY_LIMIT) {
       element.firstElementChild.remove();
     }
-    if(element.childElementCount > 0) {
-      clearHistoryBtn.classList.toggle("display");
-      console.log(historyElement.childElementCount)
-    }
+   
 
   });
+}
+
+function togglesClearHistoryButton(element, btn) {
+  if(element.childElementCount > 0) {
+    btn.classList.toggle("display");
+  }
 }
 
 
