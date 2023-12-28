@@ -3,8 +3,12 @@ const historyElement = document.querySelector(".computation-history");
 let screen = document.querySelector("[data-screen]");
 const historyBtn = document.querySelector(".history-btn");
 const slidingPart = document.querySelector(".sliding-part");
+const computationHistoryParent = document.querySelector(".computation-history-parent")
 const operators = document.querySelectorAll("[data-operator]");
 const clearHistoryBtn = document.querySelector(".clear-history-btn");
+
+
+console.log(computationHistoryParent);
 
 
 
@@ -19,7 +23,7 @@ console.log(slidingPart)
 
 historyBtn.addEventListener("click", () => {
   slidingPart.classList.toggle("slide")
-  historyElement.classList.toggle("visility")
+  computationHistoryParent.classList.toggle("visility")
 })
 
 

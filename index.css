@@ -44,17 +44,21 @@ body {
   transition: transform 2s;
 }
 
+.computation-history-parent {
+  visibility: hidden;
+
+}
+
 .computation-history {
   height: 490px;
   width: 400px;
   display: flex;
   flex-direction: column;
-  visibility: hidden;
   margin-left: 10px;
   padding-top: 10px;
 }
 
-.computation-history.visility {
+.computation-history-parent.visility {
   visibility: visible;
 }
 
