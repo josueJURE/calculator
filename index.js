@@ -297,11 +297,22 @@ function createHistoryList(array, element, history) {
   });
 }
 
+// function togglesClearHistoryButton(element, btn) {
+//   const hasChildElements = element.childElementCount > 0;
+//   btn.classList.toggle("display", hasChildElements);
+// }
+
+///
+clearHistoryBtn.addEventListener("click", () => {
+  historyElement.innerHTML = "";
+  togglesClearHistoryButton(historyElement, clearHistoryBtn);
+});
+
 function togglesClearHistoryButton(element, btn) {
-  if(element.childElementCount > 0) {
-    btn.classList.toggle("display");
-  }
+  btn.classList.toggle("display", element.childElementCount > 0);
 }
+
+
 
 
 // functions creations ends
