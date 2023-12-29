@@ -10,6 +10,8 @@ const clearHistoryBtn = document.querySelector(".clear-history-btn");
 
 console.log(clearHistoryBtn);
 
+clearHistoryBtn.addEventListener("click", () => { historyElement.innerHTML = ""})
+
 
 
 const operatorRegex = /[\/*\-+]/;
