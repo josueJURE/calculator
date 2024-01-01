@@ -1,24 +1,25 @@
 const btns = document.querySelectorAll("[data-value]");
+const historyElement = document.querySelector(".computation-history");
 let screen = document.querySelector("[data-screen]");
 const historyBtn = document.querySelector(".history-btn");
 const slidingPart = document.querySelector(".sliding-part");
+const computationHistoryParent = document.querySelector(".computation-history-parent");
 const operators = document.querySelectorAll("[data-operator]");
+const clearHistoryBtn = document.querySelector(".clear-history-btn");
+
+clearHistoryBtn.addEventListener("click", () => {historyElement.innerHTML = "";
+});
 
 const operatorRegex = /[\/*\-+]/;
 const ZERO = 0;
-const ZERO_DOT = '0.';
+const ZERO_DOT = "0.";
+const HISTORY_LIMIT = 10;
 const history = [];
 
-console.log(slidingPart)
-
-
 historyBtn.addEventListener("click", () => {
-  slidingPart.classList.toggle("slide")
-  console.log("history btn")
-})
-
-
-
+  slidingPart.classList.toggle("slide");
+  computationHistoryParent.classList.toggle("visility");
+});
 
 let data = [];
 
@@ -47,8 +48,6 @@ btns.forEach((btn) => {
     deteLastEntry(buttonValue);
 
     convertToPercentage(buttonValue);
-
-  
   });
 });
 // forEach ends & functions creations begins
@@ -57,6 +56,10 @@ function convertToPercentage(button) {
     screen.innerText = screen.innerText / 100;
   }
 }
+
+clearHistoryBtn.addEventListener("click", () => {
+  historyElement.innerHTML = "";
+});
 
 function deteLastEntry(button) {
   if (button === "DE") {
@@ -73,7 +76,6 @@ function canUserAddDot(button) {
   if (button === ".") {
     var dotAllowed = true;
     for (var i = data.length - 1; i >= ZERO; i--) {
-      console.log("data > " + data[i]);
       if (data[i] === ".") {
         dotAllowed = false;
         break;
@@ -106,7 +108,6 @@ function toggleSign(button) {
     let currentExpression = data.join("");
     let reversedExpression = currentExpression.split("").join("");
     let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
-    // debugger
 
     if (match) {
       let start = currentExpression.length - match[ZERO].length;
@@ -114,7 +115,6 @@ function toggleSign(button) {
       let currentValue = Number(match[ZERO]);
 
       if (!isNaN(currentValue)) {
-        // If it's a number, toggle its sign
         currentValue = -currentValue;
         data = data
           .slice(ZERO, start)
@@ -187,24 +187,20 @@ function userClicksOnEqualButton(button) {
       const replacedArray = data.map((item) =>
         item === "x" ? "*" : item === "÷" ? "/" : item
       );
-      // Check if the expression involves 0/0
-      // if (areYouDivindingByZero(replacedArray)) {
-      //   screen.innerText = "You cannot divide by zero. Press AC";
-      // }
-
       if (areYouDividingdZeroByZero(replacedArray)) {
         screen.innerText = "0÷0 is an invalid format. Press AC";
       } else {
         let result = eval(replacedArray.join(""));
+        let historyEntries = [[...replacedArray, "=", result]]; // Used slice() at firest. But slice() is not sufficient because it only creates a shallow copy of the array, and modifications to the new array will still affect the original array. The spread syntax ([...replacedArray]), which creates a shallow copy as well, is a concise way to create a new array with the same elements as the existing array. While ensuring that modifications to historyEntries do not affect replacedArray, and vice versa.
         replacedArray.splice(replacedArray.length, 0, "=", result);
-        history.push(replacedArray.join(""))
-        console.log(history);
-
         displayResult(replacedArray, result);
-        screen.innerText = !Number.isFinite(result) ? "You cannot divide by zero. Press AC" : result;
-        // divideByZero(screen, result);
+        screen.innerText = !Number.isFinite(result)
+          ? "You cannot divide by zero. Press AC"
+          : result;
         data = [];
         data.push(result);
+        createHistoryList(historyEntries, historyElement, history);
+        togglesClearHistoryButton(historyElement, clearHistoryBtn);
       }
     } catch (e) {
       screen.innerText = `${e.name} press AC`;
@@ -237,5 +233,23 @@ function areYouDividingdZeroByZero(array) {
 function displayResult(array, outcome) {
   array = [];
   array.push(outcome);
+}
+
+function createHistoryList(array, element, history) {
+  array.forEach((entry) => {
+    history.push(entry);
+    element.innerHTML += `<li> ${entry.join(" ")}</li>`;
+    if (element.childElementCount > HISTORY_LIMIT) {
+      element.firstElementChild.remove();
+    }
+  });
+}
+clearHistoryBtn.addEventListener("click", () => {
+  historyElement.innerHTML = "";
+  togglesClearHistoryButton(historyElement, clearHistoryBtn);
+});
+
+function togglesClearHistoryButton(element, btn) {
+  btn.classList.toggle("display", element.childElementCount > 0);
 }
 // functions creations ends
