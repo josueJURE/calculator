@@ -3,36 +3,26 @@ const historyElement = document.querySelector(".computation-history");
 let screen = document.querySelector("[data-screen]");
 const historyBtn = document.querySelector(".history-btn");
 const slidingPart = document.querySelector(".sliding-part");
-const computationHistoryParent = document.querySelector(".computation-history-parent")
+const computationHistoryParent = document.querySelector(
+  ".computation-history-parent"
+);
 const operators = document.querySelectorAll("[data-operator]");
 const clearHistoryBtn = document.querySelector(".clear-history-btn");
 
-
-console.log(clearHistoryBtn);
-
-clearHistoryBtn.addEventListener("click", () => { historyElement.innerHTML = ""})
-
-
+clearHistoryBtn.addEventListener("click", () => {
+  historyElement.innerHTML = "";
+});
 
 const operatorRegex = /[\/*\-+]/;
 const ZERO = 0;
-const ZERO_DOT = '0.';
+const ZERO_DOT = "0.";
 const HISTORY_LIMIT = 10;
 const history = [];
 
-console.log(slidingPart)
-
-
 historyBtn.addEventListener("click", () => {
-  slidingPart.classList.toggle("slide")
+  slidingPart.classList.toggle("slide");
   computationHistoryParent.classList.toggle("visility");
-})
-
-
-
-
-
-
+});
 
 let data = [];
 
@@ -61,10 +51,6 @@ btns.forEach((btn) => {
     deteLastEntry(buttonValue);
 
     convertToPercentage(buttonValue);
-
- 
-
-  
   });
 });
 // forEach ends & functions creations begins
@@ -75,10 +61,8 @@ function convertToPercentage(button) {
 }
 
 clearHistoryBtn.addEventListener("click", () => {
-  
-  historyElement.innerHTML = ""
-  console.log(historyElement.childElementCount)
-})
+  historyElement.innerHTML = "";
+});
 
 function deteLastEntry(button) {
   if (button === "DE") {
@@ -95,7 +79,6 @@ function canUserAddDot(button) {
   if (button === ".") {
     var dotAllowed = true;
     for (var i = data.length - 1; i >= ZERO; i--) {
-      console.log("data > " + data[i]);
       if (data[i] === ".") {
         dotAllowed = false;
         break;
@@ -128,7 +111,6 @@ function toggleSign(button) {
     let currentExpression = data.join("");
     let reversedExpression = currentExpression.split("").join("");
     let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
-
 
     if (match) {
       let start = currentExpression.length - match[ZERO].length;
@@ -206,7 +188,8 @@ function userClicksOnEqualButton(button) {
   if (button === "=") {
     try {
       const replacedArray = data.map((item) =>
-        item === "x" ? "*" : item === "÷" ? "/" : item);
+        item === "x" ? "*" : item === "÷" ? "/" : item
+      );
       if (areYouDividingdZeroByZero(replacedArray)) {
         screen.innerText = "0÷0 is an invalid format. Press AC";
       } else {
@@ -214,7 +197,9 @@ function userClicksOnEqualButton(button) {
         let historyEntries = [[...replacedArray, "=", result]];
         replacedArray.splice(replacedArray.length, 0, "=", result);
         displayResult(replacedArray, result);
-        screen.innerText = !Number.isFinite(result) ? "You cannot divide by zero. Press AC" : result;
+        screen.innerText = !Number.isFinite(result)
+          ? "You cannot divide by zero. Press AC"
+          : result;
         data = [];
         data.push(result);
         createHistoryList(historyEntries, historyElement, history);
@@ -253,16 +238,13 @@ function displayResult(array, outcome) {
   array.push(outcome);
 }
 
-
 function createHistoryList(array, element, history) {
-  array.forEach((entry, index) => {
+  array.forEach((entry) => {
     history.push(entry);
-    element.innerHTML += `<li> ${entry.join(" ")}</li>`
-    if(element.childElementCount > HISTORY_LIMIT) {
+    element.innerHTML += `<li> ${entry.join(" ")}</li>`;
+    if (element.childElementCount > HISTORY_LIMIT) {
       element.firstElementChild.remove();
     }
-   
-
   });
 }
 clearHistoryBtn.addEventListener("click", () => {
