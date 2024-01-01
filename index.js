@@ -128,7 +128,7 @@ function toggleSign(button) {
     let currentExpression = data.join("");
     let reversedExpression = currentExpression.split("").join("");
     let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
-    // debugger
+
 
     if (match) {
       let start = currentExpression.length - match[ZERO].length;
@@ -136,7 +136,6 @@ function toggleSign(button) {
       let currentValue = Number(match[ZERO]);
 
       if (!isNaN(currentValue)) {
-        // If it's a number, toggle its sign
         currentValue = -currentValue;
         data = data
           .slice(ZERO, start)
@@ -207,51 +206,21 @@ function userClicksOnEqualButton(button) {
   if (button === "=") {
     try {
       const replacedArray = data.map((item) =>
-        item === "x" ? "*" : item === "÷" ? "/" : item
-      );
-     
-      // console.log(historyEntries)
-      // Check if the expression involves 0/0
-      // if (areYouDivindingByZero(replacedArray)) {
-      //   screen.innerText = "You cannot divide by zero. Press AC";
-      // }
-
+        item === "x" ? "*" : item === "÷" ? "/" : item);
       if (areYouDividingdZeroByZero(replacedArray)) {
         screen.innerText = "0÷0 is an invalid format. Press AC";
       } else {
         let result = eval(replacedArray.join(""));
         let historyEntries = [[...replacedArray, "=", result]];
-        // let computationHistory = replacedArray.slice();
-
-        console.log(historyEntries)
-     
         replacedArray.splice(replacedArray.length, 0, "=", result);
-        // history.push(replacedArray.join(""));
-     
-   
-      
         displayResult(replacedArray, result);
         screen.innerText = !Number.isFinite(result) ? "You cannot divide by zero. Press AC" : result;
-        // divideByZero(screen, result);
         data = [];
         data.push(result);
-
         createHistoryList(historyEntries, historyElement, history);
-
         togglesClearHistoryButton(historyElement, clearHistoryBtn);
-        
-        // debugger
-    
-
-  
-      
-
-       
-      
-      
       }
     } catch (e) {
-      // debugger
       screen.innerText = `${e.name} press AC`;
     }
   }
@@ -296,13 +265,6 @@ function createHistoryList(array, element, history) {
 
   });
 }
-
-// function togglesClearHistoryButton(element, btn) {
-//   const hasChildElements = element.childElementCount > 0;
-//   btn.classList.toggle("display", hasChildElements);
-// }
-
-///
 clearHistoryBtn.addEventListener("click", () => {
   historyElement.innerHTML = "";
   togglesClearHistoryButton(historyElement, clearHistoryBtn);
@@ -311,8 +273,4 @@ clearHistoryBtn.addEventListener("click", () => {
 function togglesClearHistoryButton(element, btn) {
   btn.classList.toggle("display", element.childElementCount > 0);
 }
-
-
-
-
 // functions creations ends
