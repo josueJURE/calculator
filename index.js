@@ -10,6 +10,18 @@ const clearHistoryBtn = document.querySelector(".clear-history-btn");
 clearHistoryBtn.addEventListener("click", () => {historyElement.innerHTML = "";
 });
 
+document.addEventListener('keydown', handleKeyPress);
+
+function handleKeyPress(event) {
+  const key = event.key;
+  const button = document.querySelector(`[data-value="${key}"]`);
+
+  if (button) {
+    button.click(); // Trigger the click event for the corresponding button
+  }
+}
+
+
 const operatorRegex = /[\/*\-+]/;
 const ZERO = 0;
 const ZERO_DOT = "0.";
