@@ -8,37 +8,37 @@
 </head>
 <body>
     <div class="parent">
-        <div data-screen class="screen">0</div>
+        <div data-screen class="screen" aria-label="Calculator Screen">0</div>
         <div class="sliding-part">
-            <div data-value="AC" class="child symbol">AC</div>
-            <div data-value="minus" class="child symbol">+/-</div>
-            <div data-value="%" data-operator class="child symbol">%</div>
-            <div data-value="/" data-number class="child operator">÷</div>
-            <div data-value="7" class="child digit">7</div>
-            <div data-value="8" data-number class="child digit">8</div>
-            <div data-value="9" class="child digit">9</div>
-            <div data-value="*" data-operator class="child operator">x</div>
-            <div data-value="4" class="child digit">4</div>
-            <div data-value="5" class="child digit">5</div>
-            <div data-value="6" class="child digit">6</div>
-            <div data-value="-" data-operator  class="child operator">-</div>
-            <div data-value="1" class="child digit">1</div>
-            <div data-value="2" class="child digit">2</div>
-            <div data-value="3" class="child digit">3</div>
-            <div data-value="+" data-operator  class="child operator">+</div>
-            <div data-value="0" class="child zero">0</div>
-            <div data-value="DE" class="child DE">DE</div>
-            <div data-value="." class="child">.</div>
-            <div data-value="=" data-operator  class="child operator">=</div>
-            <div data-value="history" class="history-btn">history</div>
-            <div data-value="(" data-operator  class="child operator">(</div>
-            <div data-value=")" data-operator  class="child operator">)</div>
+            <button data-value="AC" class="child symbol" aria-label="All Clear">AC</button>
+            <button data-value="minus" class="child symbol" aria-label="Toggle Sign">+/-</button>
+            <button data-value="%" data-operator class="child symbol" aria-label="Percentage">%</button>
+            <button data-value="/" data-number class="child operator" aria-label="Divide">÷</button>
+            <button data-value="7" class="child digit" aria-label="Number 7">7</button>
+            <button data-value="8" data-number class="child digit" aria-label="Number 8">8</button>
+            <button data-value="9" class="child digit" aria-label="Number 9">9</button>
+            <button data-value="*" data-operator class="child operator" aria-label="Mutiply">x</button>
+            <button data-value="4" class="child digit" aria-label="Number 4">4</button>
+            <button data-value="5" class="child digit" aria-label="Number 5">5</button>
+            <button data-value="6" class="child digit" aria-label="Number 6">6</button>
+            <button data-value="-" data-operator  class="child operator" aria-label="Minus">-</button>
+            <button data-value="1" class="child digit" aria-label="Number 1">1</button>
+            <button data-value="2" class="child digit" aria-label="Number 2">2</button>
+            <button data-value="3" class="child digit" aria-label="Number 3">3</button>
+            <button data-value="+" data-operator  class="child operator" aria-label="Add">+</button>
+            <button data-value="0" class="child zero" aria-label="Number 0">0</button>
+            <button data-value="DE" class="child DE" aria-label="Delete">DE</button>
+            <button data-value="." class="child" aria-label="Decimal point">.</button>
+            <button data-value="=" data-operator  class="child operator" aria-label="Equal sign">=</button>
+            <button data-value="history" class="history-btn" aria-label="History button">history</button>
+            <button data-value="(" data-operator  class="child operator" aria-label="Opening parenthesis">(</button>
+            <button data-value=")" data-operator  class="child operator" aria-label="Closing parenthesis">)</button>
         </div>
 
         <div class="computation-history-parent">
             <h3>history</h3>
-            <ul class="computation-history"></ul>
-            <button class="clear-history-btn">clear history</button>
+            <ul class="computation-history" aria-label="Computation History"></ul>
+            <button class="clear-history-btn" aria-label="Clear History">clear history</button>
 
         </div>
    
