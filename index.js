@@ -17,6 +17,8 @@ function handleKeyPress(event) {
   const key = event.key;
   const button = document.querySelector(`[data-value="${key}"]`);
 
+
+
   if (button) {
     button.click(); // Trigger the click event for the corresponding button
   } 
@@ -30,10 +32,9 @@ function handleKeyPress(event) {
     }
   }
 
-  
- 
-
- 
+  if(event.code === "Enter") {
+    userClicksOnEqualButton("=");
+  }
 
 }
 
