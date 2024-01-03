@@ -13,12 +13,28 @@ clearHistoryBtn.addEventListener("click", () => {historyElement.innerHTML = "";
 document.addEventListener('keydown', handleKeyPress);
 
 function handleKeyPress(event) {
+  console.log(event.code)
   const key = event.key;
   const button = document.querySelector(`[data-value="${key}"]`);
 
   if (button) {
     button.click(); // Trigger the click event for the corresponding button
+  } 
+
+  if (event.code === "Backspace") {
+    let newArray = data.slice(ZERO, -1);
+    screen.innerText = newArray.join("");
+    data = newArray;
+    if (screen.innerText === "") {
+      screen.innerText = ZERO;
+    }
   }
+
+  
+ 
+
+ 
+
 }
 
 
@@ -57,7 +73,7 @@ btns.forEach((btn) => {
 
     handleNumberButton(buttonValue);
 
-    deteLastEntry(buttonValue);
+    deteLastEntry(buttonValue, e);
 
     convertToPercentage(buttonValue);
   });
@@ -73,7 +89,7 @@ clearHistoryBtn.addEventListener("click", () => {
   historyElement.innerHTML = "";
 });
 
-function deteLastEntry(button) {
+function deteLastEntry(button, e) {
   if (button === "DE") {
     let newArray = data.slice(ZERO, -1);
     screen.innerText = newArray.join("");
