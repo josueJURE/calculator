@@ -13,7 +13,7 @@ clearHistoryBtn.addEventListener("click", () => {historyElement.innerHTML = "";
 document.addEventListener('keydown', handleKeyPress);
 
 function handleKeyPress(event) {
-  console.log(event.code)
+
   const key = event.key;
   const button = document.querySelector(`[data-value="${key}"]`);
 
