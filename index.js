@@ -73,7 +73,7 @@ btns.forEach((btn) => {
 
     handleNumberButton(buttonValue);
 
-    deteLastEntry(buttonValue, e);
+    deteLastEntry(buttonValue);
 
     convertToPercentage(buttonValue);
   });
@@ -89,7 +89,7 @@ clearHistoryBtn.addEventListener("click", () => {
   historyElement.innerHTML = "";
 });
 
-function deteLastEntry(button, e) {
+function deteLastEntry(button) {
   if (button === "DE") {
     let newArray = data.slice(ZERO, -1);
     screen.innerText = newArray.join("");
