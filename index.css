@@ -34,7 +34,6 @@ body {
   height: 530px;
   width: 400px;
   border: black 1px solid;
-  border-radius: 15px;
   overflow: hidden;
   display: grid;
   grid-template-columns: repeat(4, 1fr);

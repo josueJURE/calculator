@@ -17,6 +17,8 @@ function handleKeyPress(event) {
   const key = event.key;
   const button = document.querySelector(`[data-value="${key}"]`);
 
+  console.log(key)
+
 
 
   if (button) {
