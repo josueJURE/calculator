@@ -127,5 +127,7 @@ body {
   grid-column-end: 2;
 }
 
-
-
+.equals {
+  grid-column: 4;
+  grid-row: 5 / span 2;
+}
