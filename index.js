@@ -1,3 +1,5 @@
+import {togglesClearHistoryButton, createHistoryList} from './util.js'
+
 const btns = document.querySelectorAll("[data-value]");
 const historyElement = document.querySelector(".computation-history");
 let screen = document.querySelector("[data-screen]");
@@ -266,21 +268,11 @@ function displayResult(array, outcome) {
   array.push(outcome);
 }
 
-function createHistoryList(array, element, history) {
-  array.forEach((entry) => {
-    history.push(entry);
-    element.innerHTML += `<li> ${entry.join(" ")}</li>`;
-    if (element.childElementCount > HISTORY_LIMIT) {
-      element.firstElementChild.remove();
-    }
-  });
-}
+
 clearHistoryBtn.addEventListener("click", () => {
   historyElement.innerHTML = "";
   togglesClearHistoryButton(historyElement, clearHistoryBtn);
 });
 
-function togglesClearHistoryButton(element, btn) {
-  btn.classList.toggle("display", element.childElementCount > 0);
-}
+
 // functions creations ends
