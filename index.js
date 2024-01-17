@@ -12,6 +12,16 @@ clearHistoryBtn.addEventListener("click", () => {historyElement.innerHTML = "";
 
 document.addEventListener('keydown', handleKeyPress);
 
+
+// Add this at the beginning of your script
+window.addEventListener("DOMContentLoaded", () => {
+  const history = getHistoryFromLocalStorage();
+  history.forEach((entry) => {
+    createHistoryList(entry, historyElement);
+  });
+});
+
+
 function handleKeyPress(event) {
 
   const key = event.key;
@@ -266,21 +276,53 @@ function displayResult(array, outcome) {
   array.push(outcome);
 }
 
-function createHistoryList(array, element, history) {
-  array.forEach((entry) => {
-    history.push(entry);
-    element.innerHTML += `<li> ${entry.join(" ")}</li>`;
-    if (element.childElementCount > HISTORY_LIMIT) {
-      element.firstElementChild.remove();
-    }
-  });
+// function createHistoryList(array, element) {
+
+//   array.forEach((entry) => {
+//     history.push(entry);
+//     element.innerHTML += `<li> ${entry.join(" ")}</li>`;
+//     if (element.childElementCount > HISTORY_LIMIT) {
+//       element.firstElementChild.remove();
+//     }
+//   });
+// }
+
+function createHistoryList(array, element) {
+  const history = getHistoryFromLocalStorage();
+  history.push(array);
+  setHistoryToLocalStorage(history);
+
+  element.innerHTML += `<li> ${array.join(" ")}</li>`;
+
+  if (element.childElementCount > 10) {
+    element.firstElementChild.remove();
+  }
 }
+
+function getHistoryFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("calculatorHistory")) || [];
+}
+
+function setHistoryToLocalStorage(history) {
+  localStorage.setItem("calculatorHistory", JSON.stringify(history));
+}
+
+
+
+
+
 clearHistoryBtn.addEventListener("click", () => {
   historyElement.innerHTML = "";
+  clearHistoryInLocalStorage();
   togglesClearHistoryButton(historyElement, clearHistoryBtn);
 });
 
+function clearHistoryInLocalStorage() {
+  localStorage.removeItem("calculatorHistory");
+}
+
 function togglesClearHistoryButton(element, btn) {
+  const history = getHistoryFromLocalStorage();
   btn.classList.toggle("display", element.childElementCount > 0);
 }
 // functions creations ends
