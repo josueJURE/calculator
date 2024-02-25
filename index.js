@@ -97,9 +97,7 @@ function convertToPercentage(button) {
   }
 }
 
-clearHistoryBtn.addEventListener("click", () => {
-  historyElement.innerHTML = "";
-});
+
 
 function deteLastEntry(button) {
   if (button === "DE") {
