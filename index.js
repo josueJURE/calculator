@@ -232,7 +232,7 @@ function userClicksOnEqualButton(button) {
       } else {
         let result = eval(replacedArray.join(""));
         const history = getHistoryFromLocalStorage()
-        history.push([...replacedArray, "=", result]); // Used slice() at first. But slice() is not sufficient because it only creates a shallow copy of the array, and modifications to the new array will still affect the original array. The spread syntax ([...replacedArray]), which creates a shallow copy as well, is a concise way to create a new array with the same elements as the existing array. While ensuring that modifications to historyEntries do not affect replacedArray, and vice versa.
+        history.push([...replacedArray, "=", result].join('').split(',')); // Used slice() at first. But slice() is not sufficient because it only creates a shallow copy of the array, and modifications to the new array will still affect the original array. The spread syntax ([...replacedArray]), which creates a shallow copy as well, is a concise way to create a new array with the same elements as the existing array. While ensuring that modifications to historyEntries do not affect replacedArray, and vice versa.
         replacedArray.splice(replacedArray.length, 0, "=", result);
         displayResult(replacedArray, result);
         screen.innerText = !Number.isFinite(result)
