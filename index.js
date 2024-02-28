@@ -320,6 +320,7 @@ function clearHistoryInLocalStorage() {
 
 function togglesClearHistoryButton(element, btn) {
   const history = getHistoryFromLocalStorage();
-  btn.classList.toggle("display", element.childElementCount > 0);
+  // btn.classList.toggle("display", element.childElementCount > 0);
+  clearHistoryBtn.classList.toggle("display", element.childElementCount > 0);
 }
 // functions creations ends
