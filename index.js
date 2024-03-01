@@ -7,32 +7,24 @@ const computationHistoryParent = document.querySelector(".computation-history-pa
 const operators = document.querySelectorAll("[data-operator]");
 const clearHistoryBtn = document.querySelector(".clear-history-btn");
 
-clearHistoryBtn.addEventListener("click", () => {historyElement.innerHTML = "";
+clearHistoryBtn.addEventListener("click", () => {
+  historyElement.innerHTML = "";
 });
 
-document.addEventListener('keydown', handleKeyPress);
-
+document.addEventListener("keydown", handleKeyPress);
 
 // Add this at the beginning of your script
 window.addEventListener("DOMContentLoaded", () => {
   const history = getHistoryFromLocalStorage();
-    createHistoryList(history, historyElement);
-
+  createHistoryList(history, historyElement);
 });
 
-
 function handleKeyPress(event) {
-
   const key = event.key;
   const button = document.querySelector(`[data-value="${key}"]`);
-
-  console.log(key)
-
-
-
   if (button) {
     button.click(); // Trigger the click event for the corresponding button
-  } 
+  }
 
   if (event.code === "Backspace") {
     let newArray = data.slice(ZERO, -1);
@@ -43,12 +35,10 @@ function handleKeyPress(event) {
     }
   }
 
-  if(event.code === "Enter") {
+  if (event.code === "Enter") {
     userClicksOnEqualButton("=");
   }
-
 }
-
 
 const operatorRegex = /[\/*\-+]/;
 const ZERO = 0;
@@ -96,8 +86,6 @@ function convertToPercentage(button) {
     screen.innerText = screen.innerText / 100;
   }
 }
-
-
 
 function deteLastEntry(button) {
   if (button === "DE") {
@@ -229,8 +217,8 @@ function userClicksOnEqualButton(button) {
         screen.innerText = "0÷0 is an invalid format. Press AC";
       } else {
         let result = eval(replacedArray.join(""));
-        const history = getHistoryFromLocalStorage()
-        history.push([...replacedArray, "=", result].join('').split(',')); // Used slice() at first. But slice() is not sufficient because it only creates a shallow copy of the array, and modifications to the new array will still affect the original array. The spread syntax ([...replacedArray]), which creates a shallow copy as well, is a concise way to create a new array with the same elements as the existing array. While ensuring that modifications to historyEntries do not affect replacedArray, and vice versa
+        const history = getHistoryFromLocalStorage();
+        history.push([...replacedArray, "=", result].join("").split(",")); // Used slice() at first. But slice() is not sufficient because it only creates a shallow copy of the array, and modifications to the new array will still affect the original array. The spread syntax ([...replacedArray]), which creates a shallow copy as well, is a concise way to create a new array with the same elements as the existing array. While ensuring that modifications to historyEntries do not affect replacedArray, and vice versa
         replacedArray.splice(replacedArray.length, 0, "=", result);
         displayResult(replacedArray, result);
         screen.innerText = !Number.isFinite(result)
@@ -238,12 +226,12 @@ function userClicksOnEqualButton(button) {
           : result;
         data = [];
         data.push(result);
-        setHistoryToLocalStorage(history)
+        setHistoryToLocalStorage(history);
         createHistoryList(history, historyElement);
         togglesClearHistoryButton(historyElement, clearHistoryBtn);
       }
     } catch (e) {
-      console.error(e)
+      console.error(e);
       screen.innerText = `${e.name} press AC`;
     }
   }
@@ -276,24 +264,16 @@ function displayResult(array, outcome) {
   array.push(outcome);
 }
 
-// function createHistoryList(array, element) {
-
-//   array.forEach((entry) => {
-//     history.push(entry);
-//     element.innerHTML += `<li> ${entry.join(" ")}</li>`;
-//     if (element.childElementCount > HISTORY_LIMIT) {
-//       element.firstElementChild.remove();
-//     }
-//   });
-// }
-
 function createHistoryList(entries, element) {
   element.innerHTML = "";
-    entries.slice(-10).reverse().forEach((entry) => {
-    const listItem = document.createElement("li");
-    listItem.textContent = entry;
-  element.appendChild(listItem);
-  });
+  entries
+    .slice(-10)
+    .reverse()
+    .forEach((entry) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = entry;
+      element.appendChild(listItem);
+    });
 }
 
 function getHistoryFromLocalStorage() {
@@ -303,10 +283,6 @@ function getHistoryFromLocalStorage() {
 function setHistoryToLocalStorage(history) {
   localStorage.setItem("calculatorHistory", JSON.stringify(history.slice(-10)));
 }
-
-
-
-
 
 clearHistoryBtn.addEventListener("click", () => {
   historyElement.innerHTML = "";
@@ -319,7 +295,6 @@ function clearHistoryInLocalStorage() {
 }
 
 function togglesClearHistoryButton(element, btn) {
-  const history = getHistoryFromLocalStorage();
-  btn.classList.toggle("display", element.childElementCount > 0);
+  clearHistoryBtn.classList.toggle("display", element.childElementCount > 0);
 }
 // functions creations ends
