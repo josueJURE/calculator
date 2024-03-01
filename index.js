@@ -294,7 +294,7 @@ function clearHistoryInLocalStorage() {
   localStorage.removeItem("calculatorHistory");
 }
 
-function togglesClearHistoryButton(element, btn) {
+function togglesClearHistoryButton(element) {
   clearHistoryBtn.classList.toggle("display", element.childElementCount > 0);
 }
 // functions creations ends
