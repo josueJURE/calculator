@@ -6,6 +6,7 @@ const slidingPart = document.querySelector(".sliding-part");
 const computationHistoryParent = document.querySelector(".computation-history-parent");
 const operators = document.querySelectorAll("[data-operator]");
 const clearHistoryBtn = document.querySelector(".clear-history-btn");
+let currentExpression
 
 clearHistoryBtn.addEventListener("click", () => {
   historyElement.innerHTML = "";
@@ -83,7 +84,10 @@ btns.forEach((btn) => {
 // forEach ends & functions creations begins
 function convertToPercentage(button) {
   if (button === "%") {
-    screen.innerText = screen.innerText / 100;
+    currentExpression = data.join('');
+    currentExpression = currentExpression / 100;
+    data = [currentExpression];
+    screen.innerText = currentExpression;
   }
 }
 
@@ -131,8 +135,11 @@ function deleteEverythingFromScreen(button) {
 
 function toggleSign(button) {
   if (button === "minus") {
-    let currentExpression = data.join("");
+    console.log(data)
+    currentExpression = data.join("");
+    console.log(currentExpression)
     let reversedExpression = currentExpression.split("").join("");
+    console.log(reversedExpression)
     let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
 
     if (match) {
