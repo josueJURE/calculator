@@ -172,16 +172,35 @@ function deleteEverythingFromScreen(button) {
 
 minus.addEventListener("click", toggleSign);
 
+// function toggleSign(button) {
+//   let value = Number(data.join(""))
+//   if (button === "minus") {
+//     if (value > 0) {
+//       value = -value
+//       console.log(value);
+//       screen.innerText = value;
+//     } if (value < 0) {
+//       console.log("smaller than zero")
+//       value = value * -1
+//       console.log(value)
+//       screen.innerText = value;
+//     }
+//     // screen.innerText = value;
+//     data = [value]
+//   }
+// }
+
 function toggleSign(button) {
-  if (button === "minus" && Number(data.join) !== 0) {
-    if (data[0] !== "-") {
-      data.unshift("-")
-      console.log("true");
-    } else {
-      data.shift()
+  let value = Number(data.join(""));
+  if (button === "minus") {
+    if (value > 0) {
+      value = -value;
+      screen.innerText = value;
+    } else if (value < 0) {
+      value = value * -1;
+      screen.innerText = value;
     }
-    console.log(data)
-    screen.innerText =  Number(data.join(""));
+    data = [value];
   }
 }
 
