@@ -195,11 +195,10 @@ function toggleSign(button) {
   if (button === "minus") {
     if (value > 0) {
       value = -value;
-      screen.innerText = value;
     } else if (value < 0) {
       value = value * -1;
-      screen.innerText = value;
     }
+    screen.innerText = value;
     data = [value];
   }
 }
