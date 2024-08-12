@@ -3,10 +3,15 @@ const historyElement = document.querySelector(".computation-history");
 let screen = document.querySelector("[data-screen]");
 const historyBtn = document.querySelector(".history-btn");
 const slidingPart = document.querySelector(".sliding-part");
-const computationHistoryParent = document.querySelector(".computation-history-parent");
+const computationHistoryParent = document.querySelector(
+  ".computation-history-parent"
+);
 const operators = document.querySelectorAll("[data-operator]");
 const clearHistoryBtn = document.querySelector(".clear-history-btn");
-let currentExpression
+const minus = document.querySelector(".minus");
+console.log(minus);
+
+let currentExpression;
 
 clearHistoryBtn.addEventListener("click", () => {
   historyElement.innerHTML = "";
@@ -84,9 +89,10 @@ btns.forEach((btn) => {
 // forEach ends & functions creations begins
 function convertToPercentage(button) {
   if (button === "%") {
-    currentExpression = data.join('');
+    currentExpression = data.join("");
     currentExpression = currentExpression / 100;
     data = [currentExpression];
+    console.log(data);
     screen.innerText = currentExpression;
   }
 }
@@ -133,28 +139,67 @@ function deleteEverythingFromScreen(button) {
   }
 }
 
+// function toggleSign(button) {
+//   if (button === "minus") {
+//     console.log(data[0])
+//     currentExpression = data.join("");
+//     console.log(currentExpression)
+//     let reversedExpression = currentExpression.split("").join("");
+//     console.log(reversedExpression)
+//     let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
+
+//     if (match) {
+//       let start = currentExpression.length - match[ZERO].length;
+//       let end = currentExpression.length;
+//       let currentValue = Number(match[ZERO]);
+
+//       if (!isNaN(currentValue)) {
+//         currentValue = -currentValue;
+//         data = data
+//           .slice(ZERO, start)
+//           .concat(currentValue.toString().split(""), data.slice(end));
+//         screen.innerText = data.join("");
+//       }
+//     }
+//   }
+// }
+
+// The unshift() method of Array instances adds the specified elements to the beginning
+// of an array and returns the new length of the array.
+
+// The shift() method of Array instances removes the first element from an array and returns
+// that removed element. This method changes the length of the array.
+
+minus.addEventListener("click", toggleSign);
+
+// function toggleSign(button) {
+//   let value = Number(data.join(""))
+//   if (button === "minus") {
+//     if (value > 0) {
+//       value = -value
+//       console.log(value);
+//       screen.innerText = value;
+//     } if (value < 0) {
+//       console.log("smaller than zero")
+//       value = value * -1
+//       console.log(value)
+//       screen.innerText = value;
+//     }
+//     // screen.innerText = value;
+//     data = [value]
+//   }
+// }
+
 function toggleSign(button) {
+  let value = Number(data.join(""));
   if (button === "minus") {
-    console.log(data)
-    currentExpression = data.join("");
-    console.log(currentExpression)
-    let reversedExpression = currentExpression.split("").join("");
-    console.log(reversedExpression)
-    let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
-
-    if (match) {
-      let start = currentExpression.length - match[ZERO].length;
-      let end = currentExpression.length;
-      let currentValue = Number(match[ZERO]);
-
-      if (!isNaN(currentValue)) {
-        currentValue = -currentValue;
-        data = data
-          .slice(ZERO, start)
-          .concat(currentValue.toString().split(""), data.slice(end));
-        screen.innerText = data.join("");
-      }
+    if (value > 0) {
+      value = -value;
+    } else if (value < 0) {
+      value = value * -1;
     }
+    screen.innerText = value;
+    data = [value];
   }
 }
 
