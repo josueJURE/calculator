@@ -1,17 +1,22 @@
+document.addEventListener('DOMContentLoaded', () => {
+
 const btns = document.querySelectorAll("[data-value]");
-const historyElement = document.querySelector(".computation-history");
-let screen = document.querySelector("[data-screen]");
-const historyBtn = document.querySelector(".history-btn");
-const slidingPart = document.querySelector(".sliding-part");
+const historyElement = document.querySelector(".computation-history") as HTMLElement;
+// let screenElement = document.querySelector("[data-screenElement]") as HTMLElement;
+// const screenElement = document.querySelector("[data-screenElement]") as HTMLDivElement & { innerText: string} | {innerText: number};
+const screenElement = document.querySelector("[data-screen]") as HTMLDivElement & { innerText: string };
+console.log(screenElement)
+const historyBtn = document.querySelector(".history-btn") as HTMLButtonElement;
+const slidingPart = document.querySelector(".sliding-part") as HTMLDivElement;
 const computationHistoryParent = document.querySelector(
   ".computation-history-parent"
-);
+) as HTMLDivElement;
 const operators = document.querySelectorAll("[data-operator]");
-const clearHistoryBtn = document.querySelector(".clear-history-btn");
-const minus = document.querySelector(".minus");
+const clearHistoryBtn = document.querySelector(".clear-history-btn") as HTMLButtonElement;
+const minus = document.querySelector(".minus") as HTMLButtonElement;
 console.log(minus);
 
-let currentExpression;
+let currentExpression: number ;
 
 clearHistoryBtn.addEventListener("click", () => {
   historyElement.innerHTML = "";
@@ -25,19 +30,19 @@ window.addEventListener("DOMContentLoaded", () => {
   createHistoryList(history, historyElement);
 });
 
-function handleKeyPress(event) {
+function handleKeyPress(event: any) {
   const key = event.key;
-  const button = document.querySelector(`[data-value="${key}"]`);
+  const button = document.querySelector(`[data-value="${key}"]`) as HTMLElement;
   if (button) {
     button.click(); // Trigger the click event for the corresponding button
   }
 
   if (event.code === "Backspace") {
     let newArray = data.slice(ZERO, -1);
-    screen.innerText = newArray.join("");
+    screenElement.innerText = newArray.join("");
     data = newArray;
-    if (screen.innerText === "") {
-      screen.innerText = ZERO;
+    if (screenElement.innerText === "") {
+      screenElement.innerText = String(ZERO);
     }
   }
 
@@ -50,18 +55,18 @@ const operatorRegex = /[\/*\-+]/;
 const ZERO = 0;
 const ZERO_DOT = "0.";
 const HISTORY_LIMIT = 10;
-const history = [];
+// const history = [];
 
 historyBtn.addEventListener("click", () => {
   slidingPart.classList.toggle("slide");
   computationHistoryParent.classList.toggle("visility");
 });
 
-let data = [];
+let data: (string | number)[] = [];
 
 btns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
-    let buttonValue = e.target.dataset.value;
+    let buttonValue = e.target && (e.target as HTMLElement).dataset.value;
 
     insertOpeningParenthesis(buttonValue);
 
@@ -87,55 +92,55 @@ btns.forEach((btn) => {
   });
 });
 // forEach ends & functions creations begins
-function convertToPercentage(button) {
+function convertToPercentage(button: any) {
   if (button === "%") {
-    currentExpression = data.join("");
+    currentExpression = Number(data.join(""));
     currentExpression = currentExpression / 100;
     data = [currentExpression];
     console.log(data);
-    screen.innerText = currentExpression;
+    screenElement.innerText = String(currentExpression);
   }
 }
 
-function deteLastEntry(button) {
+function deteLastEntry(button: any) {
   if (button === "DE") {
     let newArray = data.slice(ZERO, -1);
-    screen.innerText = newArray.join("");
+    screenElement.innerText = newArray.join("");
     data = newArray;
-    if (screen.innerText === "") {
-      screen.innerText = ZERO;
+    if (screenElement.innerText === "") {
+      screenElement.innerText = String(ZERO);
     }
   }
 }
 
-function canUserAddDot(button) {
+function canUserAddDot(button: any) {
   if (button === ".") {
     var dotAllowed = true;
     for (var i = data.length - 1; i >= ZERO; i--) {
       if (data[i] === ".") {
         dotAllowed = false;
         break;
-      } else if (operatorRegex.test(data[i])) {
+      } else if (operatorRegex.test(String(data[i]))) {
         break;
       }
     }
     if (dotAllowed) {
       if (data.length == ZERO) {
         data.push("0");
-      } else if (operatorRegex.test(data[data.length - 1])) {
+      } else if (operatorRegex.test(String(data[data.length - 1]))) {
         data.push("0");
       }
       data.push(".");
     }
-    screen.innerText = data.join("");
+    screenElement.innerText = data.join("");
   }
 }
 
-function deleteEverythingFromScreen(button) {
+function deleteEverythingFromScreen(button: any) {
   if (button === "AC") {
-    screen.innerText = "";
+    screenElement.innerText = "";
     data = [];
-    screen.innerText = ZERO;
+    screenElement.innerText = String(ZERO);
   }
 }
 
@@ -158,7 +163,7 @@ function deleteEverythingFromScreen(button) {
 //         data = data
 //           .slice(ZERO, start)
 //           .concat(currentValue.toString().split(""), data.slice(end));
-//         screen.innerText = data.join("");
+//         screenElement.innerText = data.join("");
 //       }
 //     }
 //   }
@@ -178,19 +183,19 @@ minus.addEventListener("click", toggleSign);
 //     if (value > 0) {
 //       value = -value
 //       console.log(value);
-//       screen.innerText = value;
+//       screenElement.innerText = value;
 //     } if (value < 0) {
 //       console.log("smaller than zero")
 //       value = value * -1
 //       console.log(value)
-//       screen.innerText = value;
+//       screenElement.innerText = value;
 //     }
-//     // screen.innerText = value;
+//     // screenElement.innerText = value;
 //     data = [value]
 //   }
 // }
 
-function toggleSign(button) {
+function toggleSign(button: any) {
   let value = Number(data.join(""));
   if (button === "minus") {
     if (value > 0) {
@@ -198,16 +203,16 @@ function toggleSign(button) {
     } else if (value < 0) {
       value = value * -1;
     }
-    screen.innerText = value;
+    screenElement.innerText = String(value);
     data = [value];
   }
 }
 
-function insertOpeningParenthesis(button) {
+function insertOpeningParenthesis(button: any) {
   if (button === "(") {
     let isOpenparenthesis = true;
     for (let i = data.length - 1; i >= ZERO; i--) {
-      if (/^\d$/.test(data[i])) {
+      if (/^\d$/.test(String(data[i]))) {
         isOpenparenthesis = false;
         break;
       }
@@ -215,31 +220,31 @@ function insertOpeningParenthesis(button) {
         isOpenparenthesis = false;
         break;
       }
-      if (operatorRegex.test(data[i])) {
+      if (operatorRegex.test(String(data[i]))) {
         break;
       }
     }
     if (isOpenparenthesis) {
       data.push("(");
     }
-    screen.innerText = data.join("");
+    screenElement.innerText = data.join("");
   }
 }
 
-function insertClosingParenthesis(button) {
+function insertClosingParenthesis(button: any) {
   if (button === ")") {
     data.push(")");
-    screen.innerText = data.join("");
+    screenElement.innerText = data.join("");
   }
 }
 
-function handlingZeroFollowedByAdecimal(button) {
-  if (Number(button) === ZERO && screen.innerText.startsWith(ZERO_DOT)) {
-    screen.innerText += button;
+function handlingZeroFollowedByAdecimal(button: any) {
+  if (Number(button) === ZERO && screenElement.innerText.startsWith(ZERO_DOT)) {
+    screenElement.innerText += button;
   }
 }
 
-function removesDecimalPointIfPrecededByAnOperator(button) {
+function removesDecimalPointIfPrecededByAnOperator(button: any) {
   if (operatorRegex.test(button)) {
     if (data.slice(-1)[ZERO] === ".") {
       data.pop();
@@ -247,49 +252,49 @@ function removesDecimalPointIfPrecededByAnOperator(button) {
     button === "*" ? (button = "x") : button === "/" ? (button = "÷") : button;
 
     data.push(button);
-    screen.innerText = data.join("");
+    screenElement.innerText = data.join("");
   }
 }
 
-function handleNumberButton(button) {
+function handleNumberButton(button: any) {
   if (!isNaN(Number(button))) {
-    screen.innerText = button;
-    data.push(screen.innerText);
-    screen.innerText = data.join("");
+    screenElement.innerText = button;
+    data.push(screenElement.innerText);
+    screenElement.innerText = data.join("");
   }
 }
 
-function userClicksOnEqualButton(button) {
+function userClicksOnEqualButton(button: any) {
   if (button === "=") {
     try {
       const replacedArray = data.map((item) =>
         item === "x" ? "*" : item === "÷" ? "/" : item
       );
       if (areYouDividingdZeroByZero(replacedArray)) {
-        screen.innerText = "0÷0 is an invalid format. Press AC";
+        screenElement.innerText = "0÷0 is an invalid format. Press AC";
       } else {
         let result = eval(replacedArray.join(""));
         const history = getHistoryFromLocalStorage();
         history.push([...replacedArray, "=", result].join("").split(",")); // Used slice() at first. But slice() is not sufficient because it only creates a shallow copy of the array, and modifications to the new array will still affect the original array. The spread syntax ([...replacedArray]), which creates a shallow copy as well, is a concise way to create a new array with the same elements as the existing array. While ensuring that modifications to historyEntries do not affect replacedArray, and vice versa
         replacedArray.splice(replacedArray.length, 0, "=", result);
         displayResult(replacedArray, result);
-        screen.innerText = !Number.isFinite(result)
+        screenElement.innerText = !Number.isFinite(result)
           ? "You cannot divide by zero. Press AC"
           : result;
         data = [];
         data.push(result);
         setHistoryToLocalStorage(history);
         createHistoryList(history, historyElement);
-        togglesClearHistoryButton(historyElement, clearHistoryBtn);
+        togglesClearHistoryButton(historyElement);
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
-      screen.innerText = `${e.name} press AC`;
+      screenElement.innerText = `${e.name} press AC`;
     }
   }
 }
 
-function areYouDivindingByZero(array) {
+function areYouDivindingByZero(array: any) {
   for (let i = ZERO; i < array.length - 2; i++) {
     if (
       !isNaN(Number(array[i])) &&
@@ -302,7 +307,7 @@ function areYouDivindingByZero(array) {
   return false;
 }
 
-function areYouDividingdZeroByZero(array) {
+function areYouDividingdZeroByZero(array: any) {
   for (let i = ZERO; i < array.length - 2; i++) {
     if (array[i] === "0" && array[i + 1] === "/" && array[i + 2] === "0") {
       return true;
@@ -311,17 +316,17 @@ function areYouDividingdZeroByZero(array) {
   return false;
 }
 
-function displayResult(array, outcome) {
+function displayResult(array: any, outcome: any) {
   array = [];
   array.push(outcome);
 }
 
-function createHistoryList(entries, element) {
+function createHistoryList(entries: any, element:any) {
   element.innerHTML = "";
   entries
     .slice(-10)
     .reverse()
-    .forEach((entry) => {
+    .forEach((entry: any) => {
       const listItem = document.createElement("li");
       listItem.textContent = entry;
       element.appendChild(listItem);
@@ -329,24 +334,26 @@ function createHistoryList(entries, element) {
 }
 
 function getHistoryFromLocalStorage() {
-  return JSON.parse(localStorage.getItem("calculatorHistory")) || [];
+  return JSON.parse(localStorage.getItem("calculatorHistory") || "[]");
 }
 
-function setHistoryToLocalStorage(history) {
+function setHistoryToLocalStorage(history: any) {
   localStorage.setItem("calculatorHistory", JSON.stringify(history.slice(-10)));
 }
 
 clearHistoryBtn.addEventListener("click", () => {
   historyElement.innerHTML = "";
   clearHistoryInLocalStorage();
-  togglesClearHistoryButton(historyElement, clearHistoryBtn);
+  togglesClearHistoryButton(historyElement);
 });
 
 function clearHistoryInLocalStorage() {
   localStorage.removeItem("calculatorHistory");
 }
 
-function togglesClearHistoryButton(element) {
+function togglesClearHistoryButton(element: any) {
   clearHistoryBtn.classList.toggle("display", element.childElementCount > 0);
 }
 // functions creations ends
+
+});
