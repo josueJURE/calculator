@@ -1,4 +1,3 @@
-"use strict";
 document.addEventListener('DOMContentLoaded', () => {
     const btns = document.querySelectorAll("[data-value]");
     const historyElement = document.querySelector(".computation-history");
@@ -51,20 +50,21 @@ document.addEventListener('DOMContentLoaded', () => {
         computationHistoryParent.classList.toggle("visility");
     });
     let data = [];
+    // let data: string[] = [];
     btns.forEach((btn) => {
         btn.addEventListener("click", function (e) {
             let buttonValue = e.target && e.target.dataset.value;
-            insertOpeningParenthesis(buttonValue);
-            insertClosingParenthesis(buttonValue);
-            deleteEverythingFromScreen(buttonValue);
+            insertOpeningParenthesis(String(buttonValue));
+            insertClosingParenthesis(String(buttonValue));
+            deleteEverythingFromScreen(String(buttonValue));
             toggleSign(buttonValue);
-            canUserAddDot(buttonValue);
-            userClicksOnEqualButton(buttonValue);
-            handlingZeroFollowedByAdecimal(buttonValue);
-            removesDecimalPointIfPrecededByAnOperator(buttonValue);
-            handleNumberButton(buttonValue);
-            deteLastEntry(buttonValue);
-            convertToPercentage(buttonValue);
+            canUserAddDot(String(buttonValue));
+            userClicksOnEqualButton(String(buttonValue));
+            handlingZeroFollowedByAdecimal(String(buttonValue));
+            removesDecimalPointIfPrecededByAnOperator(String(buttonValue));
+            handleNumberButton(String(buttonValue));
+            deteLastEntry(String(buttonValue));
+            convertToPercentage(String(buttonValue));
         });
     });
     // forEach ends & functions creations begins
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function userClicksOnEqualButton(button) {
         if (button === "=") {
             try {
-                const replacedArray = data.map((item) => item === "x" ? "*" : item === "÷" ? "/" : item);
+                const replacedArray = data.map((item) => item === "x" ? "*" : item === "÷" ? "/" : String(item));
                 if (areYouDividingdZeroByZero(replacedArray)) {
                     screenElement.innerText = "0÷0 is an invalid format. Press AC";
                 }
@@ -248,24 +248,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     togglesClearHistoryButton(historyElement);
                 }
             }
-            catch (e) {
-                console.error(e);
-                screenElement.innerText = `${e.name} press AC`;
+            catch (e) { // unknown is safer than any because TypeScript forces you to narrow the type before using it (e.g., with instanceof checks).This prevents accidental assumptions about the error structure.
+                if (e instanceof Error) {
+                    console.error(e.message);
+                    screenElement.innerText = `${e.name} press AC`;
+                }
+                else {
+                    console.error("An unknown error occurred:", e);
+                    screenElement.innerText = "Error press AC";
+                }
             }
         }
-    }
-    function areYouDivindingByZero(array) {
-        for (let i = ZERO; i < array.length - 2; i++) {
-            if (!isNaN(Number(array[i])) &&
-                array[i + 1] === "/" &&
-                array[i + 2] === "0") {
-                return true;
-            }
-        }
-        return false;
     }
     function areYouDividingdZeroByZero(array) {
-        for (let i = ZERO; i < array.length - 2; i++) {
+        for (let i = 0; i < array.length - 2; i++) {
             if (array[i] === "0" && array[i + 1] === "/" && array[i + 2] === "0") {
                 return true;
             }

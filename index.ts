@@ -63,36 +63,37 @@ historyBtn.addEventListener("click", () => {
 });
 
 let data: (string | number)[] = [];
+// let data: string[] = [];
 
 btns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     let buttonValue = e.target && (e.target as HTMLElement).dataset.value;
 
-    insertOpeningParenthesis(buttonValue);
+    insertOpeningParenthesis(String(buttonValue));
 
-    insertClosingParenthesis(buttonValue);
+    insertClosingParenthesis(String(buttonValue));
 
-    deleteEverythingFromScreen(buttonValue);
+    deleteEverythingFromScreen(String(buttonValue));
 
     toggleSign(buttonValue);
 
-    canUserAddDot(buttonValue);
+    canUserAddDot(String(buttonValue));
 
-    userClicksOnEqualButton(buttonValue);
+    userClicksOnEqualButton(String(buttonValue));
 
-    handlingZeroFollowedByAdecimal(buttonValue);
+    handlingZeroFollowedByAdecimal(String(buttonValue));
 
-    removesDecimalPointIfPrecededByAnOperator(buttonValue);
+    removesDecimalPointIfPrecededByAnOperator(String(buttonValue));
 
-    handleNumberButton(buttonValue);
+    handleNumberButton(String(buttonValue));
 
-    deteLastEntry(buttonValue);
+    deteLastEntry(String(buttonValue));
 
-    convertToPercentage(buttonValue);
+    convertToPercentage(String(buttonValue));
   });
 });
 // forEach ends & functions creations begins
-function convertToPercentage(button: any) {
+function convertToPercentage(button: string) {
   if (button === "%") {
     currentExpression = Number(data.join(""));
     currentExpression = currentExpression / 100;
@@ -102,7 +103,7 @@ function convertToPercentage(button: any) {
   }
 }
 
-function deteLastEntry(button: any) {
+function deteLastEntry(button: string) {
   if (button === "DE") {
     let newArray = data.slice(ZERO, -1);
     screenElement.innerText = newArray.join("");
@@ -113,7 +114,7 @@ function deteLastEntry(button: any) {
   }
 }
 
-function canUserAddDot(button: any) {
+function canUserAddDot(button: string) {
   if (button === ".") {
     var dotAllowed = true;
     for (var i = data.length - 1; i >= ZERO; i--) {
@@ -136,7 +137,7 @@ function canUserAddDot(button: any) {
   }
 }
 
-function deleteEverythingFromScreen(button: any) {
+function deleteEverythingFromScreen(button: string) {
   if (button === "AC") {
     screenElement.innerText = "";
     data = [];
@@ -208,7 +209,7 @@ function toggleSign(button: any) {
   }
 }
 
-function insertOpeningParenthesis(button: any) {
+function insertOpeningParenthesis(button: string): void {
   if (button === "(") {
     let isOpenparenthesis = true;
     for (let i = data.length - 1; i >= ZERO; i--) {
@@ -231,20 +232,20 @@ function insertOpeningParenthesis(button: any) {
   }
 }
 
-function insertClosingParenthesis(button: any) {
+function insertClosingParenthesis(button: string) : void {
   if (button === ")") {
     data.push(")");
     screenElement.innerText = data.join("");
   }
 }
 
-function handlingZeroFollowedByAdecimal(button: any) {
+function handlingZeroFollowedByAdecimal(button: string) : void {
   if (Number(button) === ZERO && screenElement.innerText.startsWith(ZERO_DOT)) {
     screenElement.innerText += button;
   }
 }
 
-function removesDecimalPointIfPrecededByAnOperator(button: any) {
+function removesDecimalPointIfPrecededByAnOperator(button: string) : void {
   if (operatorRegex.test(button)) {
     if (data.slice(-1)[ZERO] === ".") {
       data.pop();
@@ -256,7 +257,7 @@ function removesDecimalPointIfPrecededByAnOperator(button: any) {
   }
 }
 
-function handleNumberButton(button: any) {
+function handleNumberButton(button: string) : void {
   if (!isNaN(Number(button))) {
     screenElement.innerText = button;
     data.push(screenElement.innerText);
@@ -264,11 +265,11 @@ function handleNumberButton(button: any) {
   }
 }
 
-function userClicksOnEqualButton(button: any) {
+function userClicksOnEqualButton(button: string) {
   if (button === "=") {
     try {
       const replacedArray = data.map((item) =>
-        item === "x" ? "*" : item === "÷" ? "/" : item
+        item === "x" ? "*" : item === "÷" ? "/" : String(item)
       );
       if (areYouDividingdZeroByZero(replacedArray)) {
         screenElement.innerText = "0÷0 is an invalid format. Press AC";
@@ -287,28 +288,22 @@ function userClicksOnEqualButton(button: any) {
         createHistoryList(history, historyElement);
         togglesClearHistoryButton(historyElement);
       }
-    } catch (e: any) {
-      console.error(e);
-      screenElement.innerText = `${e.name} press AC`;
+    } catch (e: unknown) { // unknown is safer than any because TypeScript forces you to narrow the type before using it (e.g., with instanceof checks).This prevents accidental assumptions about the error structure.
+      if (e instanceof Error) {
+        console.error(e.message);
+        screenElement.innerText = `${e.name} press AC`;
+      } else {
+        console.error("An unknown error occurred:", e);
+        screenElement.innerText = "Error press AC";
+      }
     }
   }
 }
 
-function areYouDivindingByZero(array: any) {
-  for (let i = ZERO; i < array.length - 2; i++) {
-    if (
-      !isNaN(Number(array[i])) &&
-      array[i + 1] === "/" &&
-      array[i + 2] === "0"
-    ) {
-      return true;
-    }
-  }
-  return false;
-}
 
-function areYouDividingdZeroByZero(array: any) {
-  for (let i = ZERO; i < array.length - 2; i++) {
+
+function areYouDividingdZeroByZero(array: string[]): boolean {
+  for (let i = 0; i < array.length - 2; i++) {
     if (array[i] === "0" && array[i + 1] === "/" && array[i + 2] === "0") {
       return true;
     }
