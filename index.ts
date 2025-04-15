@@ -30,7 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
   createHistoryList(history, historyElement);
 });
 
-function handleKeyPress(event: any) {
+function handleKeyPress(event: KeyboardEvent) {
   const key = event.key;
   const button = document.querySelector(`[data-value="${key}"]`) as HTMLElement;
   if (button) {
