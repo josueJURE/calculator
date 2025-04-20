@@ -176,7 +176,7 @@ function deleteEverythingFromScreen(button: string) {
 // The shift() method of Array instances removes the first element from an array and returns
 // that removed element. This method changes the length of the array.
 
-minus.addEventListener("click", toggleSign);
+minus.addEventListener("click", () => toggleSign("minus"));
 
 // function toggleSign(button) {
 //   let value = Number(data.join(""))
@@ -196,7 +196,7 @@ minus.addEventListener("click", toggleSign);
 //   }
 // }
 
-function toggleSign(button: any) {
+function toggleSign(button: string): void {
   let value = Number(data.join(""));
   if (button === "minus") {
     if (value > 0) {
