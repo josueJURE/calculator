@@ -311,7 +311,7 @@ function areYouDividingdZeroByZero(array: string[]): boolean {
   return false;
 }
 
-function displayResult(array: any, outcome: any) {
+function displayResult(array: string[], outcome: string) {
   array = [];
   array.push(outcome);
 }
