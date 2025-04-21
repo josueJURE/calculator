@@ -316,7 +316,7 @@ function displayResult(array: string[], outcome: string) {
   array.push(outcome);
 }
 
-function createHistoryList(entries: any, element:any) {
+function createHistoryList(entries: string[], element: HTMLElement) {
   element.innerHTML = "";
   entries
     .slice(-10)
