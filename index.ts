@@ -321,7 +321,7 @@ function createHistoryList(entries: string[], element: HTMLElement) {
   entries
     .slice(-10)
     .reverse()
-    .forEach((entry: any) => {
+    .forEach((entry: string) => {
       const listItem = document.createElement("li");
       listItem.textContent = entry;
       element.appendChild(listItem);
