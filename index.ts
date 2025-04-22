@@ -332,7 +332,7 @@ function getHistoryFromLocalStorage() {
   return JSON.parse(localStorage.getItem("calculatorHistory") || "[]");
 }
 
-function setHistoryToLocalStorage(history: any) {
+function setHistoryToLocalStorage(history: string[]) {
   localStorage.setItem("calculatorHistory", JSON.stringify(history.slice(-10)));
 }
 
