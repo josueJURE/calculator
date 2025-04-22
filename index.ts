@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   // forEach ends & functions creations begins
-  function convertToPercentage(button: string) {
+  function convertToPercentage(button: string) : void {
     if (button === "%") {
       currentExpression = Number(data.join(""));
       currentExpression = currentExpression / 100;
@@ -110,9 +110,10 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(data);
       screenElement.innerText = String(currentExpression);
     }
+    console.log("convertToPercentage(")
   }
 
-  function deteLastEntry(button: string) {
+  function deteLastEntry(button: string) : void {
     if (button === "DE") {
       let newArray = data.slice(ZERO, -1);
       screenElement.innerText = newArray.join("");
@@ -123,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function canUserAddDot(button: string) {
+  function canUserAddDot(button: string) : void {
     if (button === ".") {
       var dotAllowed = true;
       for (var i = data.length - 1; i >= ZERO; i--) {
@@ -146,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function deleteEverythingFromScreen(button: string) {
+  function deleteEverythingFromScreen(button: string) : void {
     if (button === "AC") {
       screenElement.innerText = "";
       data = [];
@@ -154,56 +155,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // function toggleSign(button) {
-  //   if (button === "minus") {
-  //     console.log(data[0])
-  //     currentExpression = data.join("");
-  //     console.log(currentExpression)
-  //     let reversedExpression = currentExpression.split("").join("");
-  //     console.log(reversedExpression)
-  //     let match = reversedExpression.match(/(\d+(\.\d+)?)|(\D+)/); // Match a number or non-digit
-
-  //     if (match) {
-  //       let start = currentExpression.length - match[ZERO].length;
-  //       let end = currentExpression.length;
-  //       let currentValue = Number(match[ZERO]);
-
-  //       if (!isNaN(currentValue)) {
-  //         currentValue = -currentValue;
-  //         data = data
-  //           .slice(ZERO, start)
-  //           .concat(currentValue.toString().split(""), data.slice(end));
-  //         screenElement.innerText = data.join("");
-  //       }
-  //     }
-  //   }
-  // }
-
-  // The unshift() method of Array instances adds the specified elements to the beginning
-  // of an array and returns the new length of the array.
-
-  // The shift() method of Array instances removes the first element from an array and returns
-  // that removed element. This method changes the length of the array.
+  
 
   minus.addEventListener("click", () => toggleSign("minus"));
 
-  // function toggleSign(button) {
-  //   let value = Number(data.join(""))
-  //   if (button === "minus") {
-  //     if (value > 0) {
-  //       value = -value
-  //       console.log(value);
-  //       screenElement.innerText = value;
-  //     } if (value < 0) {
-  //       console.log("smaller than zero")
-  //       value = value * -1
-  //       console.log(value)
-  //       screenElement.innerText = value;
-  //     }
-  //     // screenElement.innerText = value;
-  //     data = [value]
-  //   }
-  // }
+
 
   function toggleSign(button: string): void {
     let value = Number(data.join(""));
@@ -239,6 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       screenElement.innerText = data.join("");
     }
+    console.log("insertOpeningParenthesis")
   }
 
   function insertClosingParenthesis(button: string): void {
@@ -246,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
       data.push(")");
       screenElement.innerText = data.join("");
     }
+    console.log("insertClosingParenthesis")
   }
 
   function handlingZeroFollowedByAdecimal(button: string): void {
@@ -281,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function userClicksOnEqualButton(button: string) {
+  function userClicksOnEqualButton(button: string) : void {
     if (button === "=") {
       try {
         const replacedArray = data.map((item) =>
